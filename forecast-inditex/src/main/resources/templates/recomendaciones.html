@@ -1,0 +1,36 @@
+<!-- src/main/resources/templates/recomendaciones.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Recomendaciones por tienda</title>
+</head>
+<body>
+<h1>Recomendaciones de productos por tienda</h1>
+<form th:action="@{/recomendaciones/ver}" method="get">
+    <label>Selecciona tienda:
+        <select name="tiendaId" required>
+            <option th:each="tienda : ${tiendas}" th:value="${tienda.id}" th:text="${tienda.nombre}"></option>
+        </select>
+    </label>
+    <button type="submit">Ver recomendaciones</button>
+</form>
+
+<div th:if="${productos}">
+    <h2>Productos recomendados</h2>
+    <table border="1">
+        <tr>
+            <th>Referencia</th>
+            <th>Nombre</th>
+            <th>Categoría</th>
+            <th>Estación</th>
+        </tr>
+        <tr th:each="producto : ${productos}">
+            <td th:text="${producto.id}"></td>
+            <td th:text="${producto.nombre}"></td>
+            <td th:text="${producto.categoria}"></td>
+            <td th:text="${producto.estacion}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

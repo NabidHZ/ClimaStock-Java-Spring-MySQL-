@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tiendas</title>
+</head>
+<body>
+<a th:href="@{/}">Volver al Dashboard</a>
+<h1>Lista de tiendas</h1>
+<a th:href="@{/tiendas/nueva}">Agregar nueva tienda</a>
+<table border="1">
+    <tr>
+        <th>Nombre</th>
+        <th>Ciudad</th>
+        <th>Latitud</th>
+        <th>Longitud</th>
+        <th>Acciones</th>
+    </tr>
+    <tr th:each="tienda : ${tiendas}">
+        <td th:text="${tienda.nombre}"></td>
+        <td th:text="${tienda.ciudad}"></td>
+        <td th:text="${tienda.latitud}"></td>
+        <td th:text="${tienda.longitud}"></td>
+        <td>
+            <a th:href="@{'/tiendas/editar/' + ${tienda.id}}">Editar</a>
+            <a th:href="@{'/tiendas/eliminar/' + ${tienda.id}}" onclick="return confirm('¿Seguro que quieres eliminar?')">Eliminar</a>
+        </td>
+    </tr>
+</table>
+<div th:if="${param.exito}">Tienda guardada correctamente.</div>
+<div th:if="${param.editado}">Tienda editada correctamente.</div>
+<div th:if="${param.eliminado}">Tienda eliminada correctamente.</div>
+</body>
+</html>

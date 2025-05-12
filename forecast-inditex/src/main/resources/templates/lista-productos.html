@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Productos</title>
+</head>
+<body>
+<a th:href="@{/}">Volver al Dashboard</a>
+<h1>Lista de productos</h1>
+<a th:href="@{/productos/nuevo}">Agregar nuevo producto</a>
+<table border="1">
+    <tr>
+        <th>Referencia</th>
+        <th>Nombre</th>
+        <th>Categoría</th>
+        <th>Estación</th>
+        <th>Acciones</th>
+    </tr>
+    <tr th:each="producto : ${productos}">
+        <td th:text="${producto.id}"></td>
+        <td th:text="${producto.nombre}"></td>
+        <td th:text="${producto.categoria}"></td>
+        <td th:text="${producto.estacion}"></td>
+        <td>
+            <a th:href="@{'/productos/editar/' + ${producto.id}}">Editar</a>
+            <a th:href="@{'/productos/eliminar/' + ${producto.id}}" onclick="return confirm('¿Eliminar producto?')">Eliminar</a>
+        </td>
+    </tr>
+</table>
+<div th:if="${param.exito}">Producto guardado correctamente.</div>
+<div th:if="${param.editado}">Producto editado correctamente.</div>
+<div th:if="${param.eliminado}">Producto eliminado correctamente.</div>
+</body>
+</html>

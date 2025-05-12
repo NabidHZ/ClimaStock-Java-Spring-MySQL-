@@ -1,0 +1,19 @@
+<!-- src/main/resources/templates/editar-tienda.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Editar Tienda</title>
+</head>
+<body>
+<a th:href="@{/}">Volver al Dashboard</a>
+<h1>Editar tienda</h1>
+<form th:action="@{'/tiendas/actualizar/' + ${tienda.id}}" th:object="${tienda}" method="post">
+    <label>Nombre: <input type="text" th:field="*{nombre}" required/></label><br>
+    <label>Ciudad: <input type="text" th:field="*{ciudad}" required/></label><br>
+    <label>Latitud: <input type="number" step="any" th:field="*{latitud}" required/></label><br>
+    <label>Longitud: <input type="number" step="any" th:field="*{longitud}" required/></label><br>
+    <button type="submit">Actualizar</button>
+</form>
+<a th:href="@{/tiendas}">Volver a la lista</a>
+</body>
+</html>
