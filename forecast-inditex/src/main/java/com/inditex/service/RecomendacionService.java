@@ -1,3 +1,4 @@
+// src/main/java/com/inditex/service/RecomendacionService.java
 package com.inditex.service;
 
 import com.inditex.model.Producto;
@@ -5,6 +6,7 @@ import com.inditex.model.Tienda;
 import com.inditex.repository.ProductoRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RecomendacionService {
@@ -20,14 +22,15 @@ public class RecomendacionService {
         double temp = weatherService.obtenerTemperaturaMaxima(
                 String.valueOf(tienda.getLatitud()), String.valueOf(tienda.getLongitud())
         );
-        String estacion;
-        if (temp > 25) {
-            estacion = "verano";
-        } else if (temp < 15) {
-            estacion = "invierno";
-        } else {
-            estacion = "primavera";
-        }
-        return productoRepository.findByEstacion(estacion);
+        List<Producto> productos = productoRepository.findAll();
+        return productos.stream()
+                .filter(p -> {
+                    String estacion = p.getEstacion().toLowerCase();
+                    if (estacion.equals("verano") && temp > 25) return true;
+                    if (estacion.equals("invierno") && temp < 15) return true;
+                    if (estacion.equals("primavera") && temp >= 15 && temp <= 25) return true;
+                    return false;
+                })
+                .collect(Collectors.toList());
     }
 }

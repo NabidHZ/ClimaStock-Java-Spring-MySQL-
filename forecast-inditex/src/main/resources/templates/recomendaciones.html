@@ -1,36 +1,29 @@
-<!-- src/main/resources/templates/recomendaciones.html -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Recomendaciones por tienda</title>
+  <title>Recomendaciones por Tienda</title>
 </head>
 <body>
-<h1>Recomendaciones de productos por tienda</h1>
-<form th:action="@{/recomendaciones/ver}" method="get">
-    <label>Selecciona tienda:
-        <select name="tiendaId" required>
-            <option th:each="tienda : ${tiendas}" th:value="${tienda.id}" th:text="${tienda.nombre}"></option>
-        </select>
-    </label>
-    <button type="submit">Ver recomendaciones</button>
+<a th:href="@{/}">Volver al Dashboard</a>
+<h1>Recomendaciones por Tienda</h1>
+
+<form th:action="@{/recomendaciones}" method="get">
+  <label for="tienda">Selecciona una tienda:</label>
+  <select name="tiendaId" id="tienda" required>
+    <option th:each="tienda : ${tiendas}" th:value="${tienda.id}" th:text="${tienda.nombre}"></option>
+  </select>
+  <button type="submit">Ver recomendaciones</button>
 </form>
 
 <div th:if="${productos}">
-    <h2>Productos recomendados</h2>
-    <table border="1">
-        <tr>
-            <th>Referencia</th>
-            <th>Nombre</th>
-            <th>Categoría</th>
-            <th>Estación</th>
-        </tr>
-        <tr th:each="producto : ${productos}">
-            <td th:text="${producto.id}"></td>
-            <td th:text="${producto.nombre}"></td>
-            <td th:text="${producto.categoria}"></td>
-            <td th:text="${producto.estacion}"></td>
-        </tr>
-    </table>
+  <h2>Productos recomendados:</h2>
+  <ul>
+    <li th:each="producto : ${productos}">
+      <span th:text="${producto.nombre}"></span> -
+      <span th:text="${producto.categoria}"></span> -
+      <span th:text="${producto.estacion}"></span>
+    </li>
+  </ul>
 </div>
 </body>
 </html>
