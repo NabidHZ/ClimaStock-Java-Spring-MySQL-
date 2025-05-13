@@ -20,6 +20,13 @@
             <option value="otoño">Otoño</option>
         </select>
     </label><br>
+    <label>Impermeable:
+        <select th:field="*{impermeable}" required>
+            <option value="">¿Es impermeable?</option>
+            <option value="true">Sí</option>
+            <option value="false">No</option>
+        </select>
+    </label><br>
     <button type="submit">Guardar</button>
 </form>
 <a th:href="@{/productos}">Volver a la lista</a>

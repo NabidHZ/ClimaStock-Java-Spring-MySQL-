@@ -14,6 +14,7 @@
         <th>Categoría</th>
         <th>Estación</th>
         <th>Acciones</th>
+        <th>Impermeable</th>
     </tr>
     <tr th:each="producto : ${productos}">
         <td th:text="${producto.id}"></td>
@@ -24,6 +25,7 @@
             <a th:href="@{'/productos/editar/' + ${producto.id}}">Editar</a>
             <a th:href="@{'/productos/eliminar/' + ${producto.id}}" onclick="return confirm('¿Eliminar producto?')">Eliminar</a>
         </td>
+        <td th:text="${producto.impermeable} ? 'Sí' : 'No'"></td>
     </tr>
 </table>
 <div th:if="${param.exito}">Producto guardado correctamente.</div>

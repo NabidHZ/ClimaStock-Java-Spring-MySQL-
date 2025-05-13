@@ -18,7 +18,20 @@ public class Producto {
     @Column(nullable = false)
     private String estacion;
 
+    // src/main/java/com/inditex/model/Producto.java
+    @Column(nullable = false)
+    private Boolean impermeable;
+
+    public Boolean getImpermeable() {
+        return impermeable;
+    }
+
+    public void setImpermeable(Boolean impermeable) {
+        this.impermeable = impermeable;
+    }
+
     // Getters y setters
+
 
     public Long getId() {
         return id;
@@ -51,4 +64,6 @@ public class Producto {
     public void setEstacion(String estacion) {
         this.estacion = estacion;
     }
+
+
 }
