@@ -18,7 +18,7 @@ public class WeatherService {
 
     public String fetchRawForecast(String lat, String lon) {
         String url = String.format(
-                "https://api.open-meteo.com/v1/forecast?latitude=%s&longitude=%s&daily=temperature_2m_max&timezone=Europe%%2FMadrid",
+                "https://api.open-meteo.com/v1/forecast?latitude=%s&longitude=%s&daily=temperature_2m_max&timezone=Europe/Madrid",
                 lat, lon);
         return restTemplate.getForObject(url, String.class);
     }
