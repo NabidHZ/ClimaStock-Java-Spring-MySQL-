@@ -11,7 +11,15 @@
     <label>Referencia: <input type="number" th:field="*{id}" required/></label><br>
     <label>Nombre: <input type="text" th:field="*{nombre}" required/></label><br>
     <label>Categoría: <input type="text" th:field="*{categoria}" required/></label><br>
-    <label>Estación: <input type="text" th:field="*{estacion}" required/></label><br>
+    <label>Estación:
+        <select th:field="*{estacion}" required>
+            <option value="">Selecciona una estación</option>
+            <option value="invierno">Invierno</option>
+            <option value="primavera">Primavera</option>
+            <option value="verano">Verano</option>
+            <option value="otoño">Otoño</option>
+        </select>
+    </label><br>
     <button type="submit">Guardar</button>
 </form>
 <a th:href="@{/productos}">Volver a la lista</a>
