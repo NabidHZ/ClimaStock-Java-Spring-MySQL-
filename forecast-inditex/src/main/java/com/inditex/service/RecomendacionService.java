@@ -22,8 +22,9 @@ public class RecomendacionService {
         double temp = weatherService.obtenerTemperaturaMaxima(
                 String.valueOf(tienda.getLatitud()), String.valueOf(tienda.getLongitud())
         );
+        System.out.println("Temperatura obtenida: " + temp);
         List<Producto> productos = productoRepository.findAll();
-        return productos.stream()
+        List<Producto> recomendados = productos.stream()
                 .filter(p -> {
                     String estacion = p.getEstacion().toLowerCase();
                     if (estacion.equals("verano") && temp > 25) return true;
@@ -32,5 +33,7 @@ public class RecomendacionService {
                     return false;
                 })
                 .collect(Collectors.toList());
+        System.out.println("Productos recomendados: " + recomendados.size());
+        return recomendados;
     }
 }
