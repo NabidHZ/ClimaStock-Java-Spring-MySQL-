@@ -2,9 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Productos</title>
+    <link rel="stylesheet" href="/css/stylesheet.css">
 </head>
 <body>
-<a th:href="@{/}">Volver al Dashboard</a>
+<a th:href="@{/}" class="link-dashboard">Volver al Dashboard</a>
 <h1>Lista de productos</h1>
 <a th:href="@{/productos/nuevo}">Agregar nuevo producto</a>
 <table border="1">
@@ -13,23 +14,23 @@
         <th>Nombre</th>
         <th>Categoría</th>
         <th>Estación</th>
-        <th>Acciones</th>
         <th>Impermeable</th>
+        <th>Acciones</th>
     </tr>
     <tr th:each="producto : ${productos}">
         <td th:text="${producto.id}"></td>
         <td th:text="${producto.nombre}"></td>
         <td th:text="${producto.categoria}"></td>
         <td th:text="${producto.estacion}"></td>
+        <td th:text="${producto.impermeable} ? 'Sí' : 'No'"></td>
         <td>
             <a th:href="@{'/productos/editar/' + ${producto.id}}">Editar</a>
             <a th:href="@{'/productos/eliminar/' + ${producto.id}}" onclick="return confirm('¿Eliminar producto?')">Eliminar</a>
         </td>
-        <td th:text="${producto.impermeable} ? 'Sí' : 'No'"></td>
     </tr>
 </table>
-<div th:if="${param.exito}">Producto guardado correctamente.</div>
-<div th:if="${param.editado}">Producto editado correctamente.</div>
+<a th:href="@{/}" class="link-dashboard">Volver al Dashboard</a>
+<div th:if="${param.exito}" class="alert-message">Producto guardado correctamente.</div><div th:if="${param.editado}">Producto editado correctamente.</div>
 <div th:if="${param.eliminado}">Producto eliminado correctamente.</div>
 </body>
 </html>
