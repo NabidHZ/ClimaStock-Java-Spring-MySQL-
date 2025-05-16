@@ -15,6 +15,18 @@
   <button type="submit">Ver recomendaciones</button>
 </form>
 
+<div th:if="${lluvia}">
+  <h2 style="color:blue;">¡Atención! Hay previsión de lluvia.</h2>
+  <h3>Recomendación de prendas impermeables:</h3>
+  <ul>
+    <li th:each="producto : ${impermeables}">
+      <span th:text="${producto.nombre}"></span> -
+      <span th:text="${producto.categoria}"></span> -
+      <span th:text="${producto.estacion}"></span>
+    </li>
+  </ul>
+</div>
+
 <div th:if="${productos}">
   <h2>Productos recomendados:</h2>
   <ul>
