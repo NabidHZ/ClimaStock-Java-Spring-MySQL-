@@ -27,14 +27,20 @@ public class TiendaController {
     public String listarTiendas(Model model) {
         List<Tienda> tiendas = tiendaRepository.findAll();
         Map<Long, Boolean> lluviaPorTienda = new HashMap<>();
+        Map<Long, Double> temperaturaMaxPorTienda = new HashMap<>();
         for (Tienda tienda : tiendas) {
             boolean lluvia = weatherService.hayPrevisionLluvia(
                     String.valueOf(tienda.getLatitud()), String.valueOf(tienda.getLongitud())
             );
+            double tempMax = weatherService.obtenerTemperaturaMaxima(
+                    String.valueOf(tienda.getLatitud()), String.valueOf(tienda.getLongitud())
+            );
             lluviaPorTienda.put(tienda.getId(), lluvia);
+            temperaturaMaxPorTienda.put(tienda.getId(), tempMax);
         }
         model.addAttribute("tiendas", tiendas);
         model.addAttribute("lluviaPorTienda", lluviaPorTienda);
+        model.addAttribute("temperaturaMaxPorTienda", temperaturaMaxPorTienda);
         return "lista-tiendas";
     }
 
@@ -69,4 +75,6 @@ public class TiendaController {
         tiendaRepository.deleteById(id);
         return "redirect:/tiendas?eliminado";
     }
+
+
 }
