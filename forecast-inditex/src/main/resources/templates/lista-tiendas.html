@@ -13,13 +13,16 @@
         <th>Ciudad</th>
         <th>Latitud</th>
         <th>Longitud</th>
+        <th>Lluvia</th>
         <th>Acciones</th>
+
     </tr>
     <tr th:each="tienda : ${tiendas}">
         <td th:text="${tienda.nombre}"></td>
         <td th:text="${tienda.ciudad}"></td>
         <td th:text="${tienda.latitud}"></td>
         <td th:text="${tienda.longitud}"></td>
+        <td th:text="${lluviaPorTienda[tienda.id]} ? 'Sí' : 'No'"></td>
         <td>
             <a th:href="@{'/tiendas/editar/' + ${tienda.id}}">Editar</a>
             <a th:href="@{'/tiendas/eliminar/' + ${tienda.id}}" onclick="return confirm('¿Seguro que quieres eliminar?')">Eliminar</a>
