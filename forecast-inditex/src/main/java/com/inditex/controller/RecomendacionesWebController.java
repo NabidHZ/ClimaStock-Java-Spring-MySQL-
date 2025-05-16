@@ -42,6 +42,7 @@ public class RecomendacionesWebController {
                 model.addAttribute("productos", productos);
                 model.addAttribute("lluvia", lluvia);
                 model.addAttribute("impermeables", impermeables);
+                model.addAttribute("selectedTiendaId", tiendaId);
             }
         }
         return "recomendaciones";
