@@ -8,7 +8,7 @@
 <body>
 <a th:href="@{/}">Volver al Dashboard</a>
 <h1>Agregar nuevo producto</h1>
-<form th:action="@{/productos/guardar}" th:object="${producto}" method="post">
+<form th:action="@{/productos/guardar}" th:object="${producto}" method="post" enctype="multipart/form-data">
     <label>Referencia: <input type="number" th:field="*{id}" required/></label><br>
     <label>Nombre: <input type="text" th:field="*{nombre}" required/></label><br>
     <label>Categoría: <input type="text" th:field="*{categoria}" required/></label><br>
@@ -28,6 +28,7 @@
             <option value="false">No</option>
         </select>
     </label><br>
+    <label>Imagen: <input type="file" name="imagenFile" accept="image/*"/></label><br>
     <button type="submit">Guardar</button>
 </form>
 <a th:href="@{/productos}">Volver a la lista</a>

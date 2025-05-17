@@ -15,6 +15,7 @@
         <th>Categoría</th>
         <th>Estación</th>
         <th>Impermeable</th>
+        <th>Imagen</th>
         <th>Acciones</th>
     </tr>
     <tr th:each="producto : ${productos}">
@@ -23,6 +24,9 @@
         <td th:text="${producto.categoria}"></td>
         <td th:text="${producto.estacion}"></td>
         <td th:text="${producto.impermeable} ? 'Sí' : 'No'"></td>
+        <td>
+            <img th:src="@{'/img/' + ${producto.imagen}}" alt="Imagen" style="max-width:250px; max-height:250px;" th:if="${producto.imagen != null}" />
+        </td>
         <td>
             <a th:href="@{'/productos/editar/' + ${producto.id}}">Editar</a>
             <a th:href="@{'/productos/eliminar/' + ${producto.id}}" onclick="return confirm('¿Eliminar producto?')">Eliminar</a>

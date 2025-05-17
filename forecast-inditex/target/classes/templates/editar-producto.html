@@ -1,4 +1,3 @@
-<!-- src/main/resources/templates/editar-producto.html -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -8,7 +7,7 @@
 <body>
 <a th:href="@{/}">Volver al Dashboard</a>
 <h1>Editar producto</h1>
-<form th:action="@{'/productos/actualizar/' + ${producto.id}}" th:object="${producto}" method="post">
+<form th:action="@{'/productos/actualizar/' + ${producto.id}}" th:object="${producto}" method="post" enctype="multipart/form-data">
   <label>Referencia: <input type="number" th:field="*{id}" required readonly/></label><br>
   <label>Nombre: <input type="text" th:field="*{nombre}" required/></label><br>
   <label>Categoría: <input type="text" th:field="*{categoria}" required/></label><br>
@@ -28,6 +27,13 @@
       <option value="false">No</option>
     </select>
   </label><br>
+  <label>Imagen actual:
+    <span th:if="${producto.imagen != null}">
+      <img th:src="@{'/img/' + ${producto.imagen}}" alt="Imagen" style="max-width:80px; max-height:80px;" />
+    </span>
+    <span th:if="${producto.imagen == null}">Sin imagen</span>
+  </label><br>
+  <label>Actualizar imagen: <input type="file" name="imagenFile" accept="image/*"/></label><br>
   <button type="submit">Actualizar</button>
 </form>
 <a th:href="@{/productos}">Volver a la lista</a>

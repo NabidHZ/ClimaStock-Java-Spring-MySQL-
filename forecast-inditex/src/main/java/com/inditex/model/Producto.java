@@ -30,6 +30,9 @@ public class Producto {
         this.impermeable = impermeable;
     }
 
+    @Column(name = "imagen")
+    private String imagen; // Guardará el nombre del archivo
+
     // Getters y setters
 
 
@@ -63,6 +66,14 @@ public class Producto {
 
     public void setEstacion(String estacion) {
         this.estacion = estacion;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
 
