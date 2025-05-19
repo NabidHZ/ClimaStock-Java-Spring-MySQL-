@@ -35,12 +35,15 @@ public class RecomendacionesWebController {
             if (tienda != null) {
                 boolean lluvia = weatherService.hayPrevisionLluvia(
                         String.valueOf(tienda.getLatitud()), String.valueOf(tienda.getLongitud()));
+                double temperatura = weatherService.obtenerTemperaturaMaxima(
+                        String.valueOf(tienda.getLatitud()), String.valueOf(tienda.getLongitud()));
                 List<Producto> productos = recomendacionService.recomendarProductos(tienda);
                 List<Producto> impermeables = productos.stream()
                         .filter(p -> Boolean.TRUE.equals(p.getImpermeable()))
                         .collect(Collectors.toList());
                 model.addAttribute("productos", productos);
                 model.addAttribute("lluvia", lluvia);
+                model.addAttribute("temperatura", temperatura);
                 model.addAttribute("impermeables", impermeables);
                 model.addAttribute("selectedTiendaId", tiendaId);
             }

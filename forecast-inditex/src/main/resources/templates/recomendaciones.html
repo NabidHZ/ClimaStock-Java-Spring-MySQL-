@@ -19,6 +19,16 @@
   <button type="submit">Ver recomendaciones</button>
 </form>
 
+<div th:if="${selectedTiendaId != null}">
+  <h3>Datos meteorológicos de la tienda seleccionada:</h3>
+  <p>
+    <strong>Temperatura máxima prevista:</strong>
+    <span th:text="${temperatura} + ' °C'"></span><br>
+    <strong>¿Previsión de lluvia?:</strong>
+    <span th:text="${lluvia} ? 'Sí' : 'No'"></span>
+  </p>
+</div>
+
 <div th:if="${lluvia}">
   <h2 style="color:blue;">¡Atención! Hay previsión de lluvia.</h2>
   <h3>Recomendación de prendas impermeables:</h3>
