@@ -24,9 +24,14 @@
   <h3>Recomendación de prendas impermeables:</h3>
   <ul>
     <li th:each="producto : ${impermeables}">
-      <span th:text="${producto.nombre}"></span> -
-      <span th:text="${producto.categoria}"></span> -
-      <span th:text="${producto.estacion}"></span>
+      <strong>ID:</strong> <span th:text="${producto.id}"></span> |
+      <strong>Nombre:</strong> <span th:text="${producto.nombre}"></span> |
+      <strong>Categoría:</strong> <span th:text="${producto.categoria}"></span> |
+      <strong>Estación:</strong> <span th:text="${producto.estacion}"></span> |
+      <strong>Impermeable:</strong> <span th:text="${producto.impermeable} ? 'Sí' : 'No'"></span>
+      <div th:if="${producto.imagen != null}">
+        <img th:src="@{'/img/' + ${producto.imagen}}" alt="Imagen" style="max-width:120px; max-height:120px; margin-top:5px;" />
+      </div>
     </li>
   </ul>
 </div>
@@ -35,9 +40,14 @@
   <h2>Productos recomendados:</h2>
   <ul>
     <li th:each="producto : ${productos}">
-      <span th:text="${producto.nombre}"></span> -
-      <span th:text="${producto.categoria}"></span> -
-      <span th:text="${producto.estacion}"></span>
+      <strong>ID:</strong> <span th:text="${producto.id}"></span> |
+      <strong>Nombre:</strong> <span th:text="${producto.nombre}"></span> |
+      <strong>Categoría:</strong> <span th:text="${producto.categoria}"></span> |
+      <strong>Estación:</strong> <span th:text="${producto.estacion}"></span> |
+      <strong>Impermeable:</strong> <span th:text="${producto.impermeable} ? 'Sí' : 'No'"></span>
+      <div th:if="${producto.imagen != null}">
+        <img th:src="@{'/img/' + ${producto.imagen}}" alt="Imagen" style="max-width:120px; max-height:120px; margin-top:5px;" />
+      </div>
     </li>
   </ul>
 </div>
