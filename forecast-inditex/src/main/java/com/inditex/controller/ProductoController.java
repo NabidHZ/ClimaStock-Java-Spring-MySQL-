@@ -45,7 +45,7 @@ public class ProductoController {
                 extension = originalName.substring(i);
             }
             String nombreArchivo = System.currentTimeMillis() + extension;
-            Path ruta = Paths.get("src/main/resources/static/img/" + nombreArchivo);
+            Path ruta = Paths.get("uploads/img/" + nombreArchivo);
             Files.copy(imagenFile.getInputStream(), ruta, StandardCopyOption.REPLACE_EXISTING);
             producto.setImagen(nombreArchivo);
         }
@@ -74,7 +74,7 @@ public class ProductoController {
                 extension = originalName.substring(i);
             }
             String nombreArchivo = System.currentTimeMillis() + extension;
-            Path ruta = Paths.get("src/main/resources/static/img/" + nombreArchivo);
+            Path ruta = Paths.get("uploads/img/" + nombreArchivo);
             Files.copy(imagenFile.getInputStream(), ruta, StandardCopyOption.REPLACE_EXISTING);
             producto.setImagen(nombreArchivo);
         } else {

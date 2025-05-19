@@ -29,7 +29,7 @@
   </label><br>
   <label>Imagen actual:
     <span th:if="${producto.imagen != null}">
-      <img th:src="@{'/img/' + ${producto.imagen}}" alt="Imagen" style="max-width:80px; max-height:80px;" />
+      <img th:src="@{'/img/' + ${producto.imagen}}" alt="Imagen" style="max-width:250px; max-height:250px;" />
     </span>
     <span th:if="${producto.imagen == null}">Sin imagen</span>
   </label><br>
