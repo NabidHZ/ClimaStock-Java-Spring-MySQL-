@@ -2,11 +2,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Dashboard General</title>
-  <link rel="stylesheet" href="/css/stylesheet.css"></head>
-<body>
-<h1>Dashboard General</h1>
-<ul>
+  <title>ClimaStock</title>
+  <link rel="stylesheet" href="/css/stylesheet.css">
+</head>
+<body class="dashboard-bg">
+<h1>ClimaStock</h1>
+
+<ul class="menu-principal">
   <li><a th:href="@{/productos}">Gestión de Productos</a></li>
   <li><a th:href="@{/tiendas}">Gestión de Tiendas</a></li>
   <li><a th:href="@{/recomendaciones}">Recomendaciones por Tienda</a></li>

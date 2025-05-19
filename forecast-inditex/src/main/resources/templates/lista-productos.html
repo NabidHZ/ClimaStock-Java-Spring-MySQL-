@@ -5,15 +5,17 @@
     <link rel="stylesheet" href="/css/stylesheet.css">
 </head>
 <body>
-<a th:href="@{/}" class="link-dashboard">Volver al Dashboard</a>
 <h1>Lista de productos</h1>
-<a th:href="@{/productos/nuevo}">Agregar nuevo producto</a>
+<a th:href="@{/productos/nuevo}">Agregar nuevo producto</a>    <br>
+<br>
+<a th:href="@{/}" class="link-dashboard">Volver al Dashboard</a>
 <table border="1">
     <tr>
         <th>Referencia</th>
         <th>Nombre</th>
         <th>Categoría</th>
         <th>Estación</th>
+        <th>Sección</th>
         <th>Impermeable</th>
         <th>Imagen</th>
         <th>Acciones</th>
@@ -23,9 +25,10 @@
         <td th:text="${producto.nombre}"></td>
         <td th:text="${producto.categoria}"></td>
         <td th:text="${producto.estacion}"></td>
+        <td th:text="${producto.seccion}"></td>
         <td th:text="${producto.impermeable} ? 'Sí' : 'No'"></td>
         <td>
-            <img th:src="@{'/img/' + ${producto.imagen}}" alt="Imagen" style="max-width:250px; max-height:250px;" th:if="${producto.imagen != null}" />
+            <img th:src="@{'/img/' + ${producto.imagen}}" alt="Imagen" style="max-width:150px; max-height:150px;" th:if="${producto.imagen != null}" />
         </td>
         <td>
             <a th:href="@{'/productos/editar/' + ${producto.id}}">Editar</a>
@@ -34,6 +37,7 @@
     </tr>
 </table>
 <a th:href="@{/}" class="link-dashboard">Volver al Dashboard</a>
+
 <div th:if="${param.exito}" class="alert-message">Producto guardado correctamente.</div><div th:if="${param.editado}">Producto editado correctamente.</div>
 <div th:if="${param.eliminado}">Producto eliminado correctamente.</div>
 </body>

@@ -22,16 +22,13 @@ public class Producto {
     @Column(nullable = false)
     private Boolean impermeable;
 
-    public Boolean getImpermeable() {
-        return impermeable;
-    }
-
-    public void setImpermeable(Boolean impermeable) {
-        this.impermeable = impermeable;
-    }
 
     @Column(name = "imagen")
     private String imagen; // Guardará el nombre del archivo
+
+    @Column(nullable = false)
+    private String seccion;
+
 
     // Getters y setters
 
@@ -76,5 +73,20 @@ public class Producto {
         this.imagen = imagen;
     }
 
+    public String getSeccion() {
+        return seccion;
+    }
+
+    public void setSeccion(String seccion) {
+        this.seccion = seccion;
+    }
+
+    public Boolean getImpermeable() {
+        return impermeable;
+    }
+
+    public void setImpermeable(Boolean impermeable) {
+        this.impermeable = impermeable;
+    }
 
 }
