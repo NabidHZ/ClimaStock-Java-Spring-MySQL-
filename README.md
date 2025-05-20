@@ -2,6 +2,9 @@
 
 Este proyecto es una aplicación que recomienda a las tiendas físicas de Inditex qué productos destacar según el clima local de su ciudad. El objetivo es optimizar la rotación de stock adaptando la oferta en tienda a las condiciones meteorológicas previstas.
 
+![image](https://github.com/user-attachments/assets/cb6dc5e7-1242-47c7-8e23-e11b8dae02e2)
+
+
 ## ¿Cómo funciona?
 
 1. **Carga de Catálogo**  
