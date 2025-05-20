@@ -88,5 +88,5 @@ Este proyecto es una aplicación que recomienda a las tiendas físicas de Indite
 
 ## Autor
 
-Nabid Hassan Zaman
+Nabid HZ
 ---
