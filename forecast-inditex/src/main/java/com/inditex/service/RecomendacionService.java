@@ -18,22 +18,22 @@ public class RecomendacionService {
         this.weatherService = weatherService;
     }
 
+    // src/main/java/com/inditex/service/RecomendacionService.java
     public List<Producto> recomendarProductos(Tienda tienda) {
         double temp = weatherService.obtenerTemperaturaMaxima(
                 String.valueOf(tienda.getLatitud()), String.valueOf(tienda.getLongitud())
         );
-        System.out.println("Temperatura obtenida: " + temp);
         List<Producto> productos = productoRepository.findAll();
         List<Producto> recomendados = productos.stream()
                 .filter(p -> {
                     String estacion = p.getEstacion().toLowerCase();
-                    if (estacion.equals("verano") && temp > 25) return true;
-                    if (estacion.equals("invierno") && temp < 15) return true;
+                    if (estacion.equals("invierno") && temp < 10) return true;
+                    if (estacion.equals("otoño") && temp >= 10 && temp < 15) return true;
                     if (estacion.equals("primavera") && temp >= 15 && temp <= 25) return true;
+                    if (estacion.equals("verano") && temp > 25) return true;
                     return false;
                 })
                 .collect(Collectors.toList());
-        System.out.println("Productos recomendados: " + recomendados.size());
         return recomendados;
     }
 }
