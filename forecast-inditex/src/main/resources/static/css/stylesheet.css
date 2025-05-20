@@ -269,3 +269,38 @@ tr:hover td {
     border: 1.5px solid #e6dcc7;
     animation: fadeInUp 1.2s;
 }
+
+.menu-principal {
+    position: static;
+    margin: 0.5em 0 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1em;
+    z-index: 10;
+}
+.menu-opcion {
+    background: linear-gradient(90deg, #bfa77a 0%, #e6dcc7 100%);
+    color: #222;
+    border: none;
+    border-radius: 1em;
+    padding: 0.7em 1.5em;
+    font-size: 1em;
+    font-weight: 600;
+    box-shadow: 0 2px 12px rgba(191,167,122,0.10);
+    text-align: left;
+    transition: background 0.3s, color 0.3s, transform 0.2s;
+    text-decoration: none;
+    margin: 0.2em 0;
+    display: block;
+    width: auto;
+    max-width: 220px;
+}
+.menu-opcion:hover {
+    background: linear-gradient(90deg, #222 0%, #bfa77a 100%);
+    color: #fff;
+    transform: scale(1.03);
+    letter-spacing: 0.5px;
+}
