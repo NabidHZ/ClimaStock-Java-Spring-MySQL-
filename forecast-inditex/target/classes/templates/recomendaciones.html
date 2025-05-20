@@ -29,37 +29,47 @@
   </p>
 </div>
 
+<!-- ...código anterior... -->
+
 <div th:if="${lluvia}">
   <h2 style="color:blue;">¡Atención! Hay previsión de lluvia.</h2>
   <h3>Recomendación de prendas impermeables:</h3>
-  <ul>
-    <li th:each="producto : ${impermeables}">
-      <strong>ID:</strong> <span th:text="${producto.id}"></span> |
-      <strong>Nombre:</strong> <span th:text="${producto.nombre}"></span> |
-      <strong>Categoría:</strong> <span th:text="${producto.categoria}"></span> |
-      <strong>Estación:</strong> <span th:text="${producto.estacion}"></span> |
-      <strong>Impermeable:</strong> <span th:text="${producto.impermeable} ? 'Sí' : 'No'"></span>
-      <div th:if="${producto.imagen != null}">
-        <img th:src="@{'/img/' + ${producto.imagen}}" alt="Imagen" style="max-width:120px; max-height:120px; margin-top:5px;" />
+  <div class="card-background">
+    <div class="card-list">
+      <div class="product-card" th:each="producto : ${impermeables}">
+        <div class="product-image">
+          <img th:src="@{'/img/' + ${producto.imagen}}" alt="Imagen" th:if="${producto.imagen != null}" />
+        </div>
+        <div class="product-info">
+          <h2 th:text="${producto.nombre}"></h2>
+          <p><strong>Referencia:</strong> <span th:text="${producto.id}"></span></p>
+          <p><strong>Categoría:</strong> <span th:text="${producto.categoria}"></span></p>
+          <p><strong>Estación:</strong> <span th:text="${producto.estacion}"></span></p>
+          <p><strong>Impermeable:</strong> <span th:text="${producto.impermeable} ? 'Sí' : 'No'"></span></p>
+        </div>
       </div>
-    </li>
-  </ul>
+    </div>
+  </div>
 </div>
 
 <div th:if="${productos}">
   <h2>Productos recomendados:</h2>
-  <ul>
-    <li th:each="producto : ${productos}">
-      <strong>ID:</strong> <span th:text="${producto.id}"></span> |
-      <strong>Nombre:</strong> <span th:text="${producto.nombre}"></span> |
-      <strong>Categoría:</strong> <span th:text="${producto.categoria}"></span> |
-      <strong>Estación:</strong> <span th:text="${producto.estacion}"></span> |
-      <strong>Impermeable:</strong> <span th:text="${producto.impermeable} ? 'Sí' : 'No'"></span>
-      <div th:if="${producto.imagen != null}">
-        <img th:src="@{'/img/' + ${producto.imagen}}" alt="Imagen" style="max-width:120px; max-height:120px; margin-top:5px;" />
+  <div class="card-background">
+    <div class="card-list">
+      <div class="product-card" th:each="producto : ${productos}">
+        <div class="product-image">
+          <img th:src="@{'/img/' + ${producto.imagen}}" alt="Imagen" th:if="${producto.imagen != null}" />
+        </div>
+        <div class="product-info">
+          <h2 th:text="${producto.nombre}"></h2>
+          <p><strong>Referencia:</strong> <span th:text="${producto.id}"></span></p>
+          <p><strong>Categoría:</strong> <span th:text="${producto.categoria}"></span></p>
+          <p><strong>Estación:</strong> <span th:text="${producto.estacion}"></span></p>
+          <p><strong>Impermeable:</strong> <span th:text="${producto.impermeable} ? 'Sí' : 'No'"></span></p>
+        </div>
       </div>
-    </li>
-  </ul>
+    </div>
+  </div>
 </div>
 </body>
 </html>
