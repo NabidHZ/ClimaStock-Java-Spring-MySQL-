@@ -83,8 +83,7 @@ Este proyecto es una aplicación que recomienda a las tiendas físicas de Indite
 - Thymeleaf
 - API meteorológica (Open-Meteo, WeatherAPI, etc.)
 
-## Licencia
+## Autor
 
-MIT
-
+Nabid Hassan Zaman
 ---
