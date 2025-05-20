@@ -9,20 +9,22 @@ Este proyecto es una aplicación que recomienda a las tiendas físicas de Indite
 
 1. **Carga de Catálogo**  
    El usuario carga un catálogo de productos, donde cada producto tiene asociada una categoría y una estación recomendada (por ejemplo: primavera, verano, otoño, invierno).
+   ![image](https://github.com/user-attachments/assets/c1e1821c-9dd9-4077-a998-ba0d12574320)
 
-2. **Obtención de Datos Meteorológicos**  
+
+3. **Obtención de Datos Meteorológicos**  
    El sistema consulta una fuente de datos meteorológicos abierta (por ejemplo, Open-Meteo o WeatherAPI) para obtener la previsión del clima en cada ciudad donde hay una tienda.
 
-3. **Lógica de Recomendación**  
+4. **Lógica de Recomendación**  
    Se aplica una lógica sencilla basada en reglas, por ejemplo:
    - Si la temperatura prevista es mayor a 25°C, se recomiendan productos de verano (camisetas, vestidos, etc.).
    - Si se prevé lluvia, se priorizan prendas impermeables o de abrigo.
    - Las reglas pueden adaptarse según las necesidades del negocio.
 
-4. **Generación de Informe por Tienda**  
+5. **Generación de Informe por Tienda**  
    Para cada tienda, el sistema genera una lista de productos recomendados en función del clima local.
 
-5. **Exposición de Resultados**  
+6. **Exposición de Resultados**  
    - **API REST**: El sistema expone un endpoint REST para que otros sistemas (por ejemplo, logística) puedan consultar las recomendaciones en formato JSON.
    - **Interfaz Web**: También dispone de una interfaz web donde se puede seleccionar una tienda y visualizar las recomendaciones de productos en una página HTML.
 
