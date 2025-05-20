@@ -6,39 +6,33 @@
 </head>
 <body>
 <h1>Lista de productos</h1>
-<a th:href="@{/productos/nuevo}">Agregar nuevo producto</a>    <br>
+<a th:href="@{/productos/nuevo}">Agregar nuevo producto</a>
 <br>
 <a th:href="@{/}" class="link-dashboard">Volver al Dashboard</a>
-<table border="1">
-    <tr>
-        <th>Referencia</th>
-        <th>Nombre</th>
-        <th>Categoría</th>
-        <th>Estación</th>
-        <th>Sección</th>
-        <th>Impermeable</th>
-        <th>Imagen</th>
-        <th>Acciones</th>
-    </tr>
-    <tr th:each="producto : ${productos}">
-        <td th:text="${producto.id}"></td>
-        <td th:text="${producto.nombre}"></td>
-        <td th:text="${producto.categoria}"></td>
-        <td th:text="${producto.estacion}"></td>
-        <td th:text="${producto.seccion}"></td>
-        <td th:text="${producto.impermeable} ? 'Sí' : 'No'"></td>
-        <td>
-            <img th:src="@{'/img/' + ${producto.imagen}}" alt="Imagen" style="max-width:150px; max-height:150px;" th:if="${producto.imagen != null}" />
-        </td>
-        <td>
-            <a th:href="@{'/productos/editar/' + ${producto.id}}">Editar</a>
-            <a th:href="@{'/productos/eliminar/' + ${producto.id}}" onclick="return confirm('¿Eliminar producto?')">Eliminar</a>
-        </td>
-    </tr>
-</table>
-<a th:href="@{/}" class="link-dashboard">Volver al Dashboard</a>
 
-<div th:if="${param.exito}" class="alert-message">Producto guardado correctamente.</div><div th:if="${param.editado}">Producto editado correctamente.</div>
+<div class="card-background">
+    <div class="card-list">
+        <div class="product-card" th:each="producto : ${productos}">
+            <div class="product-image">
+                <img th:src="@{'/img/' + ${producto.imagen}}" alt="Imagen" th:if="${producto.imagen != null}" />
+            </div>
+            <div class="product-info">
+                <h2 th:text="${producto.nombre}"></h2>
+                <p><strong>Referencia:</strong> <span th:text="${producto.id}"></span></p>
+                <p><strong>Categoría:</strong> <span th:text="${producto.categoria}"></span></p>
+                <p><strong>Estación:</strong> <span th:text="${producto.estacion}"></span></p>
+                <p><strong>Sección:</strong> <span th:text="${producto.seccion}"></span></p>
+                <p><strong>Impermeable:</strong> <span th:text="${producto.impermeable} ? 'Sí' : 'No'"></span></p>
+                <div class="product-actions">
+                    <a th:href="@{'/productos/editar/' + ${producto.id}}">Editar</a>
+                    <a th:href="@{'/productos/eliminar/' + ${producto.id}}" onclick="return confirm('¿Eliminar producto?')">Eliminar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:if="${param.exito}" class="alert-message">Producto guardado correctamente.</div>
+<div th:if="${param.editado}">Producto editado correctamente.</div>
 <div th:if="${param.eliminado}">Producto eliminado correctamente.</div>
 </body>
 </html>
