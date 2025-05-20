@@ -113,7 +113,6 @@ Para más ejemplos, consulta `/docs/API-usage.md`.
 
 ## Autores
 
-* **Nombre Apellido** – [@TuUsuarioGitHub](https://github.com/TuUsuarioGitHub)
 * **NahidHZ** – [@NabidHZ](https://github.com/NabidHZ)
 
 ---
