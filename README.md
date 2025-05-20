@@ -14,6 +14,7 @@ Este proyecto es una aplicación que recomienda a las tiendas físicas de Indite
 
 3. **Obtención de Datos Meteorológicos**  
    El sistema consulta una fuente de datos meteorológicos abierta (por ejemplo, Open-Meteo o WeatherAPI) para obtener la previsión del clima en cada ciudad donde hay una tienda.
+![image](https://github.com/user-attachments/assets/e196d0a7-27e8-499f-aa38-daff9564d097)
 
 4. **Lógica de Recomendación**  
    Se aplica una lógica sencilla basada en reglas, por ejemplo:
@@ -27,6 +28,9 @@ Este proyecto es una aplicación que recomienda a las tiendas físicas de Indite
 6. **Exposición de Resultados**  
    - **API REST**: El sistema expone un endpoint REST para que otros sistemas (por ejemplo, logística) puedan consultar las recomendaciones en formato JSON.
    - **Interfaz Web**: También dispone de una interfaz web donde se puede seleccionar una tienda y visualizar las recomendaciones de productos en una página HTML.
+     ![image](https://github.com/user-attachments/assets/1b310103-075d-44ce-a353-ac5e8548e1d9)
+     ![image](https://github.com/user-attachments/assets/0d6ee6d9-75fc-4bcd-b45b-272e260fdcc8)
+
 
 ## Arquitectura
 
