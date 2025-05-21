@@ -45,7 +45,7 @@ Este proyecto es una aplicación que recomienda a las tiendas físicas de Indite
   - Servicio de integración con la API meteorológica.
 - **Modelo de Datos**:
   - Productos, tiendas, categorías, estaciones, etc.
-  - Tiendas y productos guardas en una DB de MySQL en un Dcoker
+  - Tiendas y productos guardas en una DB de MySQL en un Docker
     ![image](https://github.com/user-attachments/assets/5fb6e0d8-5477-4888-bb17-b23274a22e52)
 
 
