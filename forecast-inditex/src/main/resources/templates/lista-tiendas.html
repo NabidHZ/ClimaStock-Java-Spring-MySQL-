@@ -1,41 +1,59 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Tiendas</title>
+    <meta charset="UTF-8">
+    <title>Lista de Tiendas</title>
     <link rel="stylesheet" href="/css/stylesheet.css">
 </head>
 <body>
-<h1>Lista de tiendas</h1>
-<a th:href="@{/tiendas/nueva}">Agregar nueva tienda</a><br>
-<br>
-<a th:href="@{/}">Volver al Dashboard</a>
+<h1>Lista de Tiendas</h1>
 
-<table border="1">
-    <tr>
-        <th>Nombre</th>
-        <th>Ciudad</th>
-        <th>Latitud</th>
-        <th>Longitud</th>
-        <th>Temp. Máxima (°C)</th>
-        <th>Lluvia</th>
-        <th>Acciones</th>
+<div class="table-actions">
+    <a th:href="@{/tiendas/nueva}">Agregar nueva tienda</a>
+    <a th:href="@{/}" class="link-dashboard">Volver al Dashboard</a>
+</div>
 
-    </tr>
-    <tr th:each="tienda : ${tiendas}">
-        <td th:text="${tienda.nombre}"></td>
-        <td th:text="${tienda.ciudad}"></td>
-        <td th:text="${tienda.latitud}"></td>
-        <td th:text="${tienda.longitud}"></td>
-        <td th:text="${temperaturaMaxPorTienda[tienda.id]}"></td>
-        <td th:text="${lluviaPorTienda[tienda.id]} ? 'Sí' : 'No'"></td>
-        <td>
-            <a th:href="@{'/tiendas/editar/' + ${tienda.id}}">Editar</a>
-            <a th:href="@{'/tiendas/eliminar/' + ${tienda.id}}" onclick="return confirm('¿Seguro que quieres eliminar?')">Eliminar</a>
-        </td>
-    </tr>
-</table>
-<div th:if="${param.exito}">Tienda guardada correctamente.</div>
-<div th:if="${param.editado}">Tienda editada correctamente.</div>
-<div th:if="${param.eliminado}">Tienda eliminada correctamente.</div>
+<div class="table-container">
+    <table class="tiendas-table">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Ciudad</th>
+            <th>Latitud</th>
+            <th>Longitud</th>
+            <th>Temp. Máx (°C)</th>
+            <th>Lluvia</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="tienda : ${tiendas}">
+            <td data-label="Nombre" th:text="${tienda.nombre}"></td>
+            <td data-label="Ciudad" th:text="${tienda.ciudad}"></td>
+            <td data-label="Latitud" th:text="${tienda.latitud}"></td>
+            <td data-label="Longitud" th:text="${tienda.longitud}"></td>
+            <td data-label="Temp. Máx" th:text="${temperaturaMaxPorTienda[tienda.id]}"></td>
+            <td data-label="Lluvia" th:text="${lluviaPorTienda[tienda.id]} ? 'Sí' : 'No'"></td>
+            <td data-label="Acciones">
+                <a th:href="@{'/tiendas/editar/' + ${tienda.id}}">Editar</a>
+                <a th:href="@{'/tiendas/eliminar/' + ${tienda.id}}"
+                   onclick="return confirm('¿Seguro que quieres eliminar?')">
+                    Eliminar
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:if="${param.exito}" class="alert-message">
+    Tienda guardada correctamente.
+</div>
+<div th:if="${param.editado}" class="alert-message">
+    Tienda editada correctamente.
+</div>
+<div th:if="${param.eliminado}" class="alert-message">
+    Tienda eliminada correctamente.
+</div>
 </body>
 </html>

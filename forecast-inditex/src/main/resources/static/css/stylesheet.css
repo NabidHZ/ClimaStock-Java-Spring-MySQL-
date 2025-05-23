@@ -1,4 +1,6 @@
-/* Fuentes y Reset */
+/* ======================
+   Global & Reset
+   ====================== */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
 
 * {
@@ -7,24 +9,24 @@
     box-sizing: border-box;
 }
 
-/* Cuerpo y fondo */
 body {
     font-family: 'Montserrat', Arial, sans-serif;
     background: linear-gradient(120deg, #f7f6f3 70%, #e6dcc7 100%);
     color: #222;
     min-height: 100vh;
-    transition: background 0.7s;
     padding: 20px;
+    transition: background 0.7s;
 }
 
-/* Títulos */
+/* ======================
+   Headings
+   ====================== */
 h1, h2 {
     font-weight: 600;
     letter-spacing: 1px;
     color: #222;
     margin-bottom: 1rem;
     text-align: center;
-    position: relative;
     animation: fadeInDown 0.8s;
 }
 h1::after {
@@ -37,20 +39,23 @@ h1::after {
     border-radius: 2px;
 }
 
-/* Enlaces principales */
+/* ======================
+   Links & Buttons
+   ====================== */
 a {
     color: #222;
     text-decoration: none;
     border-bottom: 2px solid transparent;
-    transition: border-color 0.2s, color 0.2s;
+    transition: color 0.2s, border-color 0.2s;
+    font-weight: 600;
 }
 a:hover {
     color: #bfa77a;
     border-color: #bfa77a;
 }
 
-/* Botones y enlaces destacados */
 .link-dashboard,
+a[href*="/tiendas/nueva"],
 a[href*="/productos/nuevo"] {
     display: inline-block;
     background: #bfa77a;
@@ -61,42 +66,27 @@ a[href*="/productos/nuevo"] {
     transition: background 0.3s, transform 0.2s;
 }
 .link-dashboard:hover,
+a[href*="/tiendas/nueva"]:hover,
 a[href*="/productos/nuevo"]:hover {
     background: #222;
     transform: scale(1.05);
 }
 
-/* Filtros */
-.filtros-productos {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: rgba(255,255,255,0.9);
-    padding: 0.5rem 1rem;
-    border-radius: 0.8rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    display: flex;
-    gap: 0.8rem;
+/* ======================
+   Animations
+   ====================== */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
-.filtros-productos label {
-    font-size: 0.9rem;
-    color: #444;
-}
-.filtros-productos select {
-    border: 1px solid #ddd;
-    border-radius: 0.5rem;
-    padding: 0.4rem 0.6rem;
-    background: #faf9f7;
-    font-size: 0.9rem;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    appearance: none;
-}
-.filtros-productos select:focus {
-    border-color: #bfa77a;
-    box-shadow: 0 0 6px rgba(191,167,122,0.3);
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Contenedor de tarjetas */
+/* ======================
+   Lista de Productos (revisado)
+   ====================== */
 .card-background {
     background: #f3ede5;
     border-radius: 1.5rem;
@@ -106,16 +96,12 @@ a[href*="/productos/nuevo"]:hover {
     max-width: 1200px;
     animation: fadeInUp 1s;
 }
-
-/* Lista de tarjetas */
 .card-list {
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
     justify-content: center;
 }
-
-/* Tarjeta individual */
 .product-card {
     background: #fff;
     border-radius: 1rem;
@@ -130,8 +116,6 @@ a[href*="/productos/nuevo"]:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 32px rgba(191,167,122,0.15);
 }
-
-/* Imagen */
 .product-image {
     background: #e6dcc7;
     text-align: center;
@@ -142,8 +126,6 @@ a[href*="/productos/nuevo"]:hover {
     max-height: 200px;
     object-fit: cover;
 }
-
-/* Información */
 .product-info {
     padding: 1rem;
     display: flex;
@@ -158,11 +140,6 @@ a[href*="/productos/nuevo"]:hover {
     font-size: 0.95rem;
     color: #555;
 }
-.product-info p strong {
-    color: #222;
-}
-
-/* Acciones */
 .product-actions {
     margin-top: auto;
     display: flex;
@@ -182,7 +159,119 @@ a[href*="/productos/nuevo"]:hover {
     color: #f7f6f3;
 }
 
-/* Mensajes de estado */
+/* Responsive Productos */
+@media (max-width: 768px) {
+    .product-card { width: 90%; }
+}
+
+/* ======================
+   Lista de Tiendas
+   ====================== */
+.table-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.table-container {
+    max-width: 1100px;
+    margin: 2rem auto;
+    background: #f3ede5;
+    border-radius: 1.2rem;
+    box-shadow: 0 6px 24px rgba(191,167,122,0.12);
+    overflow: hidden;
+    animation: fadeInUp 1s;
+    padding: 1rem;
+}
+.tiendas-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #fff;
+}
+.tiendas-table thead {
+    background: #e6dcc7;
+}
+.tiendas-table th,
+.tiendas-table td {
+    padding: 0.8rem 1rem;
+    text-align: left;
+    font-size: 0.95rem;
+    color: #222;
+    border-bottom: 1px solid #ece7df;
+}
+.tiendas-table th {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+.tiendas-table tbody tr:hover td {
+    background: #f7f6f3;
+}
+.tiendas-table td:last-child {
+    display: flex;
+    gap: 0.6rem;
+}
+.tiendas-table td:last-child a {
+    flex: 1;
+    text-align: center;
+    padding: 0.4rem 0;
+    border: 1px solid #bfa77a;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    color: #bfa77a;
+    transition: background 0.2s, color 0.2s;
+}
+.tiendas-table td:last-child a:hover {
+    background: #bfa77a;
+    color: #f7f6f3;
+}
+
+/* Responsive Tiendas */
+@media (max-width: 800px) {
+    .table-actions {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    .tiendas-table thead {
+        display: none;
+    }
+    .tiendas-table,
+    .tiendas-table tbody,
+    .tiendas-table tr,
+    .tiendas-table td {
+        display: block;
+        width: 100%;
+    }
+    .tiendas-table tr {
+        margin-bottom: 1rem;
+        background: #fff;
+        border-radius: 0.8rem;
+        box-shadow: 0 4px 16px rgba(191,167,122,0.08);
+    }
+    .tiendas-table td {
+        text-align: right;
+        position: relative;
+        padding-left: 50%;
+        border: none;
+    }
+    .tiendas-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 1rem;
+        width: calc(50% - 2rem);
+        font-weight: 600;
+        color: #444;
+        text-align: left;
+    }
+    .tiendas-table td:last-child {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+/* ======================
+   Alert Messages
+   ====================== */
 .alert-message {
     max-width: 400px;
     background: #fffbe6;
@@ -191,20 +280,105 @@ a[href*="/productos/nuevo"]:hover {
     margin: 1rem auto;
     color: #bfa77a;
     border-radius: 0.5rem;
+    animation: fadeInUp 1s;
+}
+/* Contenedor del formulario */
+.form-container {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
 }
 
-/* Animaciones */
-@keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
+/* Estilo del filtro */
+.filter-form {
+    background: rgba(255,255,255,0.9);
+    padding: 1.5rem 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 16px rgba(191,167,122,0.10);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    animation: fadeInUp 0.8s;
 }
 
-/* Media queries */
-@media (max-width: 768px) {
-    .filtros-productos { position: static; margin: 1rem auto; }
-    .product-card { width: 90%; }
+.filter-form label {
+    font-weight: 600;
+    color: #444;
+}
+
+.filter-form select {
+    padding: 0.5rem 1rem;
+    border-radius: 0.6rem;
+    border: 1px solid #ddd;
+    background: #faf9f7;
+    transition: border-color 0.2s;
+}
+
+.filter-form button {
+    background: linear-gradient(90deg, #bfa77a 0%, #e6dcc7 100%);
+    color: #222;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 0.6rem;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+}
+
+.filter-form button:hover {
+    background: linear-gradient(90deg, #222 0%, #bfa77a 100%);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* Secciones */
+.weather-info {
+    max-width: 800px;
+    margin: 2rem auto;
+    background: #fff;
+    padding: 1rem 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 16px rgba(191,167,122,0.08);
+    animation: fadeInDown 0.8s;
+}
+
+.weather-info h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.weather-info p {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+}
+
+/* ======================
+   Logo central Dashboard
+   ====================== */
+.dashboard-bg {
+    position: relative;
+    min-height: 100vh;
+    background: #f7f6f3; /* mismo color que el fondo del logo */
+}
+
+.logo-centro {
+    position: fixed;
+    top: 58%; /* más abajo que el centro */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    background: transparent;
+}
+.logo-centro img {
+    width: 336px;
+    height: auto;
+    opacity: 0.98;
+    filter: drop-shadow(0 4px 24px rgba(0,0,0,0.10));
+    background: #f7f6f3; /* igual que el fondo */
+    border-radius: 1.5rem; /* opcional, si el logo lo permite */
 }

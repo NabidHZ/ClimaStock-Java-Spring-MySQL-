@@ -1,71 +1,82 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+  <meta charset="UTF-8">
   <title>Recomendaciones por Tienda</title>
   <link rel="stylesheet" href="/css/stylesheet.css">
 </head>
 <body>
-<a th:href="@{/}">Volver al Dashboard</a>
+<a th:href="@{/}" class="link-dashboard">Volver al Dashboard</a>
 <h1>Recomendaciones por Tienda</h1>
 
-<form th:action="@{/recomendaciones}" method="get">
-  <label for="tienda">Selecciona una tienda:</label>
-  <select name="tiendaId" id="tienda" required>
-    <option th:each="tienda : ${tiendas}"
-            th:value="${tienda.id}"
-            th:text="${tienda.nombre}"
-            th:selected="${tienda.id} == ${selectedTiendaId}"></option>
-  </select>
-  <button type="submit">Ver recomendaciones</button>
-</form>
-
-<div th:if="${selectedTiendaId != null}">
-  <h3>Datos meteorológicos de la tienda seleccionada:</h3>
-  <p>
-    <strong>Temperatura máxima prevista:</strong>
-    <span th:text="${temperatura} + ' °C'"></span><br>
-    <strong>¿Previsión de lluvia?:</strong>
-    <span th:text="${lluvia} ? 'Sí' : 'No'"></span>
-  </p>
+<!-- Formulario centrado y estilizado -->
+<div class="form-container">
+  <form th:action="@{/recomendaciones}" method="get" class="filter-form">
+    <label for="tienda">Selecciona una tienda:</label>
+    <select name="tiendaId" id="tienda" required>
+      <option value="">-- Elige una tienda --</option>
+      <option th:each="tienda : ${tiendas}"
+              th:value="${tienda.id}"
+              th:text="${tienda.nombre}"
+              th:selected="${tienda.id} == ${selectedTiendaId}">
+      </option>
+    </select>
+    <button type="submit">Ver recomendaciones</button>
+  </form>
 </div>
 
-<!-- ...código anterior... -->
+<!-- Solo se muestra cuando hay tienda seleccionada -->
+<div th:if="${selectedTiendaId != null}">
+  <!-- Información meteorológica -->
+  <section class="weather-info">
+    <h2>Clima en tienda seleccionada</h2>
+    <p><strong>Temp. máx prevista:</strong>
+      <span th:text="${temperatura} + ' °C'"></span>
+    </p>
+    <p><strong>¿Previsión de lluvia?:</strong>
+      <span th:text="${lluvia} ? 'Sí' : 'No'"></span>
+    </p>
+  </section>
 
-<div th:if="${lluvia}">
-  <h2 style="color:blue;">¡Atención! Hay previsión de lluvia.</h2>
-  <h3>Recomendación de prendas impermeables:</h3>
-  <div class="card-background">
-    <div class="card-list">
-      <div class="product-card" th:each="producto : ${impermeables}">
-        <div class="product-image">
-          <img th:src="@{'/img/' + ${producto.imagen}}" alt="Imagen" th:if="${producto.imagen != null}" />
-        </div>
-        <div class="product-info">
-          <h2 th:text="${producto.nombre}"></h2>
-          <p><strong>Referencia:</strong> <span th:text="${producto.id}"></span></p>
-          <p><strong>Categoría:</strong> <span th:text="${producto.categoria}"></span></p>
-          <p><strong>Estación:</strong> <span th:text="${producto.estacion}"></span></p>
-          <p><strong>Impermeable:</strong> <span th:text="${producto.impermeable} ? 'Sí' : 'No'"></span></p>
+  <!-- Alerta de lluvia -->
+  <div th:if="${lluvia}" class="alert-message">
+    <strong>¡Atención!</strong> Hay previsión de lluvia.
+    Destaca prendas impermeables.
+  </div>
+
+  <!-- Prendas impermeables -->
+  <div th:if="${lluvia}">
+    <h2>Prendas Impermeables</h2>
+    <div class="card-background">
+      <div class="card-list">
+        <div class="product-card" th:each="producto : ${impermeables}">
+          <div class="product-image">
+            <img th:if="${producto.imagen}" th:src="@{'/img/' + ${producto.imagen}}" alt="Imagen">
+          </div>
+          <div class="product-info">
+            <h3 th:text="${producto.nombre}"></h3>
+            <p><strong>Ref:</strong> <span th:text="${producto.id}"></span></p>
+            <p><strong>Estación:</strong> <span th:text="${producto.estacion}"></span></p>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<div th:if="${productos}">
-  <h2>Productos recomendados:</h2>
-  <div class="card-background">
-    <div class="card-list">
-      <div class="product-card" th:each="producto : ${productos}">
-        <div class="product-image">
-          <img th:src="@{'/img/' + ${producto.imagen}}" alt="Imagen" th:if="${producto.imagen != null}" />
-        </div>
-        <div class="product-info">
-          <h2 th:text="${producto.nombre}"></h2>
-          <p><strong>Referencia:</strong> <span th:text="${producto.id}"></span></p>
-          <p><strong>Categoría:</strong> <span th:text="${producto.categoria}"></span></p>
-          <p><strong>Estación:</strong> <span th:text="${producto.estacion}"></span></p>
-          <p><strong>Impermeable:</strong> <span th:text="${producto.impermeable} ? 'Sí' : 'No'"></span></p>
+  <!-- Productos recomendados -->
+  <div th:if="${productos}">
+    <h2>Productos Recomendados</h2>
+    <div class="card-background">
+      <div class="card-list">
+        <div class="product-card" th:each="producto : ${productos}">
+          <div class="product-image">
+            <img th:if="${producto.imagen}" th:src="@{'/img/' + ${producto.imagen}}" alt="Imagen">
+          </div>
+          <div class="product-info">
+            <h3 th:text="${producto.nombre}"></h3>
+            <p><strong>Ref:</strong> <span th:text="${producto.id}"></span></p>
+            <p><strong>Estación:</strong> <span th:text="${producto.estacion}"></span></p>
+          </div>
         </div>
       </div>
     </div>
