@@ -42,6 +42,7 @@ public class ProductoController {
         model.addAttribute("productos", productos);
         model.addAttribute("generoSeleccionado", genero);
         model.addAttribute("seccionSeleccionada", seccion);
+        model.addAttribute("page", "productos");
         return "lista-productos";
     }
 
