@@ -383,3 +383,18 @@ a[href*="/productos/nuevo"]:hover {
     border-radius: 1.5rem; /* opcional, si el logo lo permite */
 }
 
+.page-header {
+    position: sticky;
+    top: 0;
+    background: #f7f6f3;
+    z-index: 100;
+    padding-top: 1rem;
+}
+
+nav.main-nav {
+    position: sticky;
+    top: 4rem; /* ajusta según la altura del header */
+    background: #f7f6f3;
+    z-index: 99;
+    padding-bottom: 0.5rem;
+}

@@ -1,0 +1,12 @@
+<!-- src/main/resources/templates/fragments/header.html -->
+<div th:fragment="main-header(titulo, page)">
+    <header class="page-header">
+        <h1 th:text="${titulo}">Título</h1>
+    </header>
+    <nav class="main-nav">
+        <a th:href="@{/}" class="nav-link" th:classappend="${page} == 'dashboard' ? ' active'">ClimaStock</a>
+        <a th:href="@{/productos}" class="nav-link" th:classappend="${page} == 'productos' ? ' active'">Productos</a>
+        <a th:href="@{/tiendas}" class="nav-link" th:classappend="${page} == 'tiendas' ? ' active'">Tiendas</a>
+        <a th:href="@{/recomendaciones}" class="nav-link" th:classappend="${page} == 'recomendaciones' ? ' active'">Recomendaciones</a>
+    </nav>
+</div>
