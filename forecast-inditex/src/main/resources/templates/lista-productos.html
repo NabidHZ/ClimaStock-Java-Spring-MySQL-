@@ -11,20 +11,22 @@
 <a th:href="@{/}" class="link-dashboard">Volver al Dashboard</a>
 
 <!-- Filtro por género y sección -->
-<form th:action="@{/productos}" method="get" id="filtroForm">
-    <label>Género:
-        <select name="genero" id="genero" onchange="actualizarSecciones(); document.getElementById('filtroForm').submit();">
-            <option value="">Todos</option>
-            <option value="mujer" th:selected="${generoSeleccionado == 'mujer'}">Mujer</option>
-            <option value="hombre" th:selected="${generoSeleccionado == 'hombre'}">Hombre</option>
-        </select>
-    </label>
-    <label>Sección:
-        <select name="seccion" id="seccion" onchange="document.getElementById('filtroForm').submit();">
-            <option value="">Todas</option>
-        </select>
-    </label>
-</form>
+<div class="filtros-productos">
+    <form th:action="@{/productos}" method="get" id="filtroForm">
+        <label>
+            <select name="genero" id="genero" onchange="actualizarSecciones(); document.getElementById('filtroForm').submit();">
+                <option value="">Todos</option>
+                <option value="mujer" th:selected="${generoSeleccionado == 'mujer'}">Mujer</option>
+                <option value="hombre" th:selected="${generoSeleccionado == 'hombre'}">Hombre</option>
+            </select>
+        </label>
+        <label>
+            <select name="seccion" id="seccion" onchange="document.getElementById('filtroForm').submit();">
+                <option value="">Todas</option>
+            </select>
+        </label>
+    </form>
+</div>
 <script>
     function actualizarSecciones() {
         const genero = document.getElementById('genero').value;
