@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
 
 @Controller
 @RequestMapping("/productos")
@@ -24,8 +25,23 @@ public class ProductoController {
     }
 
     @GetMapping
-    public String listarProductos(Model model) {
-        model.addAttribute("productos", productoRepository.findAll());
+    public String listarProductos(
+            @RequestParam(value = "genero", required = false) String genero,
+            @RequestParam(value = "seccion", required = false) String seccion,
+            Model model) {
+        List<Producto> productos;
+        if (genero != null && !genero.isEmpty()) {
+            if (seccion != null && !seccion.isEmpty()) {
+                productos = productoRepository.findByGeneroAndSeccion(genero, seccion);
+            } else {
+                productos = productoRepository.findByGenero(genero);
+            }
+        } else {
+            productos = productoRepository.findAll();
+        }
+        model.addAttribute("productos", productos);
+        model.addAttribute("generoSeleccionado", genero);
+        model.addAttribute("seccionSeleccionada", seccion);
         return "lista-productos";
     }
 
@@ -49,8 +65,8 @@ public class ProductoController {
             Files.copy(imagenFile.getInputStream(), ruta, StandardCopyOption.REPLACE_EXISTING);
             producto.setImagen(nombreArchivo);
         }
-        productoRepository.save(producto);
-        return "redirect:/productos?exito";
+        Producto guardado = productoRepository.save(producto);
+        return "redirect:/productos?exito&id=" + guardado.getId();
     }
 
     @GetMapping("/editar/{id}")

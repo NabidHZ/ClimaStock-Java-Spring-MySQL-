@@ -6,8 +6,9 @@ import jakarta.persistence.*;
 @Table(name = "productos")
 public class Producto {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, unique = true)
-    private Long id; // Número de referencia manual
+    private Long id;
 
     @Column(nullable = false)
     private String nombre;
@@ -29,6 +30,8 @@ public class Producto {
     @Column(nullable = false)
     private String seccion;
 
+    @Column(nullable = false)
+    private String genero;
 
     // Getters y setters
 
@@ -88,5 +91,8 @@ public class Producto {
     public void setImpermeable(Boolean impermeable) {
         this.impermeable = impermeable;
     }
+
+    public String getGenero() { return genero; }
+    public void setGenero(String genero) { this.genero = genero; }
 
 }

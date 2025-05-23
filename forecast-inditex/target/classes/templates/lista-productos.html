@@ -10,6 +10,45 @@
 <br><br>
 <a th:href="@{/}" class="link-dashboard">Volver al Dashboard</a>
 
+<!-- Filtro por género y sección -->
+<form th:action="@{/productos}" method="get" id="filtroForm">
+    <label>Género:
+        <select name="genero" id="genero" onchange="actualizarSecciones(); document.getElementById('filtroForm').submit();">
+            <option value="">Todos</option>
+            <option value="mujer" th:selected="${generoSeleccionado == 'mujer'}">Mujer</option>
+            <option value="hombre" th:selected="${generoSeleccionado == 'hombre'}">Hombre</option>
+        </select>
+    </label>
+    <label>Sección:
+        <select name="seccion" id="seccion" onchange="document.getElementById('filtroForm').submit();">
+            <option value="">Todas</option>
+        </select>
+    </label>
+</form>
+<script>
+    function actualizarSecciones() {
+        const genero = document.getElementById('genero').value;
+        const seccion = document.getElementById('seccion');
+        seccion.innerHTML = '<option value="">Todas</option>';
+        if (genero === 'mujer') {
+            seccion.innerHTML += '<option value="Woman">Woman</option>';
+            seccion.innerHTML += '<option value="Basic">Basic</option>';
+            seccion.innerHTML += '<option value="TRF">TRF</option>';
+        } else if (genero === 'hombre') {
+            seccion.innerHTML += '<option value="Man">Man</option>';
+            seccion.innerHTML += '<option value="TRF">TRF</option>';
+            seccion.innerHTML += '<option value="Global">Global</option>';
+        }
+    }
+    window.onload = function() {
+        actualizarSecciones();
+        const seccionSel = "[[${seccionSeleccionada}]]";
+        if (seccionSel) {
+            document.getElementById('seccion').value = seccionSel;
+        }
+    }
+</script>
+
 <div class="card-background">
     <div class="card-list">
         <div class="product-card" th:each="producto : ${productos}">
@@ -21,6 +60,7 @@
                 <p><strong>Referencia:</strong> <span th:text="${producto.id}"></span></p>
                 <p><strong>Categoría:</strong> <span th:text="${producto.categoria}"></span></p>
                 <p><strong>Estación:</strong> <span th:text="${producto.estacion}"></span></p>
+                <p><strong>Género:</strong> <span th:text="${producto.genero}"></span></p>
                 <p><strong>Sección:</strong> <span th:text="${producto.seccion}"></span></p>
                 <p><strong>Impermeable:</strong> <span th:text="${producto.impermeable} ? 'Sí' : 'No'"></span></p>
                 <div class="product-actions">
@@ -31,7 +71,10 @@
         </div>
     </div>
 </div>
-<div th:if="${param.exito}" class="alert-message">Producto guardado correctamente.</div>
+<div th:if="${param.exito}">
+    Producto guardado correctamente.
+    <span th:if="${param.id}">ID asignado: <strong th:text="${param.id}"></strong></span>
+</div>
 <div th:if="${param.editado}">Producto editado correctamente.</div>
 <div th:if="${param.eliminado}">Producto eliminado correctamente.</div>
 </body>

@@ -20,12 +20,16 @@
       <option value="otoño">Otoño</option>
     </select>
   </label><br>
+  <label>Género:
+    <select id="genero" th:field="*{genero}" required onchange="actualizarSecciones()">
+      <option value="">Selecciona un género</option>
+      <option value="mujer" th:selected="${producto.genero == 'mujer'}">Mujer</option>
+      <option value="hombre" th:selected="${producto.genero == 'hombre'}">Hombre</option>
+    </select>
+  </label><br>
   <label>Sección:
-    <select th:field="*{seccion}" required>
+    <select id="seccion" th:field="*{seccion}" required>
       <option value="">Selecciona una sección</option>
-      <option value="Basic">Basic</option>
-      <option value="Woman">Woman</option>
-      <option value="TRF">TRF</option>
     </select>
   </label><br>
   <label>Impermeable:
@@ -45,5 +49,28 @@
   <button type="submit">Actualizar</button>
 </form>
 <a th:href="@{/productos}">Volver a la lista</a>
+<script>
+  function actualizarSecciones() {
+    const genero = document.getElementById('genero').value;
+    const seccion = document.getElementById('seccion');
+    seccion.innerHTML = '<option value="">Selecciona una sección</option>';
+    if (genero === 'mujer') {
+      seccion.innerHTML += '<option value="Woman">Woman</option>';
+      seccion.innerHTML += '<option value="Basic">Basic</option>';
+      seccion.innerHTML += '<option value="TRF">TRF</option>';
+    } else if (genero === 'hombre') {
+      seccion.innerHTML += '<option value="Man">Man</option>';
+      seccion.innerHTML += '<option value="TRF">TRF</option>';
+      seccion.innerHTML += '<option value="Global">Global</option>';
+    }
+  }
+  window.onload = function() {
+    actualizarSecciones();
+    const seccionSel = "[[${producto.seccion}]]";
+    if (seccionSel) {
+      document.getElementById('seccion').value = seccionSel;
+    }
+  }
+</script>
 </body>
 </html>
