@@ -6,12 +6,8 @@
     <link rel="stylesheet" href="/css/stylesheet.css">
 </head>
 <body>
-<h1>Lista de Tiendas</h1>
-
-<div class="table-actions">
-    <a th:href="@{/tiendas/nueva}">Agregar nueva tienda</a>
-    <a th:href="@{/}" class="link-dashboard">Volver al Dashboard</a>
-</div>
+<fragment th:replace="fragments/header :: main-header('Lista de Tiendas', 'tiendas')"/>
+<a th:href="@{/tiendas/nueva}" class="btn-primary">Agregar nueva tienda</a>
 
 <div class="table-container">
     <table class="tiendas-table">

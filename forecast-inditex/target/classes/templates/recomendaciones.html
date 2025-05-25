@@ -6,8 +6,7 @@
   <link rel="stylesheet" href="/css/stylesheet.css">
 </head>
 <body>
-<a th:href="@{/}" class="link-dashboard">Volver al Dashboard</a>
-<h1>Recomendaciones por Tienda</h1>
+<fragment th:replace="fragments/header :: main-header('Recomendaciones', 'recomendaciones')"/>
 
 <!-- Formulario centrado y estilizado -->
 <div class="form-container">
