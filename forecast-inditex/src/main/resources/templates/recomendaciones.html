@@ -21,14 +21,10 @@
       </option>
     </select>
     <label for="genero">Género:</label>
-    <select name="genero" id="genero" onchange="actualizarSecciones(); document.getElementById('filtroRecomendaciones').submit();">
+    <select name="genero" id="genero" onchange="document.getElementById('filtroRecomendaciones').submit();">
       <option value="">Todos</option>
       <option value="mujer" th:selected="${generoSeleccionado} == 'mujer'">Mujer</option>
       <option value="hombre" th:selected="${generoSeleccionado} == 'hombre'">Hombre</option>
-    </select>
-    <label for="seccion">Sección:</label>
-    <select name="seccion" id="seccion" onchange="document.getElementById('filtroRecomendaciones').submit();">
-      <option value="">Todas</option>
     </select>
     <button type="submit">Ver recomendaciones</button>
   </form>
