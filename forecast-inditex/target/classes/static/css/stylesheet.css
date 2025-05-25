@@ -559,5 +559,97 @@ nav.main-nav {
         padding: 1.2rem;
     }
 }
-}
 
+/* ======================
+   Formulario de Edición de Producto
+   ====================== */
+.form-edit-producto {
+    max-width: 520px;
+    margin: 2.5rem auto;
+    background: rgba(255,255,255,0.97);
+    border-radius: 1.2rem;
+    box-shadow: 0 4px 24px rgba(191,167,122,0.13);
+    padding: 2.5rem 2.5rem 2rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    animation: fadeInUp 0.8s;
+}
+.form-edit-producto label {
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 0.3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+.form-edit-producto input[type="text"],
+.form-edit-producto input[type="number"],
+.form-edit-producto select {
+    padding: 0.6rem 1rem;
+    border-radius: 0.6rem;
+    border: 1px solid #ddd;
+    background: #faf9f7;
+    font-size: 1rem;
+    margin-top: 0.2rem;
+    margin-bottom: 0.5rem;
+    transition: border-color 0.2s;
+}
+.form-edit-producto input[type="file"] {
+    margin-top: 0.5rem;
+}
+.form-edit-producto button[type="submit"] {
+    background: linear-gradient(90deg, #bfa77a 0%, #e6dcc7 100%);
+    color: #222;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 0.6rem;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    transition: transform 0.2s, background 0.3s;
+}
+.form-edit-producto button[type="submit"]:hover {
+    background: linear-gradient(90deg, #222 0%, #bfa77a 100%);
+    color: #fff;
+    transform: translateY(-2px);
+}
+.form-edit-producto img {
+    max-width: 180px;
+    max-height: 180px;
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px rgba(191,167,122,0.13);
+    margin-top: 0.5rem;
+}
+.form-edit-producto .img-actual {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+.form-edit-producto .img-actual span {
+    font-size: 0.95rem;
+    color: #888;
+}
+.form-edit-producto a {
+    color: #bfa77a;
+    font-weight: 600;
+    margin-top: 1.2rem;
+    text-align: center;
+    display: inline-block;
+    transition: color 0.2s;
+}
+.form-edit-producto a:hover {
+    color: #222;
+}
+@media (max-width: 600px) {
+    .form-edit-producto {
+        padding: 1.2rem 0.7rem 1.2rem 0.7rem;
+        max-width: 98vw;
+    }
+    .form-edit-producto img {
+        max-width: 120px;
+        max-height: 120px;
+    }
+}

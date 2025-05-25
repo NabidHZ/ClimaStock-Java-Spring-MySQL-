@@ -7,10 +7,10 @@
 <body>
 <a th:href="@{/}">Volver al Dashboard</a>
 <h1>Editar producto</h1>
-<form th:action="@{'/productos/actualizar/' + ${producto.id}}" th:object="${producto}" method="post" enctype="multipart/form-data">
-  <label>Referencia: <input type="number" th:field="*{id}" required readonly/></label><br>
-  <label>Nombre: <input type="text" th:field="*{nombre}" required/></label><br>
-  <label>Categoría: <input type="text" th:field="*{categoria}" required/></label><br>
+<form class="form-edit-producto" th:action="@{'/productos/actualizar/' + ${producto.id}}" th:object="${producto}" method="post" enctype="multipart/form-data">
+  <label>Referencia: <input type="number" th:field="*{id}" required readonly/></label>
+  <label>Nombre: <input type="text" th:field="*{nombre}" required/></label>
+  <label>Categoría: <input type="text" th:field="*{categoria}" required/></label>
   <label>Estación:
     <select th:field="*{estacion}" required>
       <option value="">Selecciona una estación</option>
@@ -19,33 +19,34 @@
       <option value="verano">Verano</option>
       <option value="otoño">Otoño</option>
     </select>
-  </label><br>
+  </label>
   <label>Género:
     <select id="genero" th:field="*{genero}" required onchange="actualizarSecciones()">
       <option value="">Selecciona un género</option>
       <option value="mujer" th:selected="${producto.genero == 'mujer'}">Mujer</option>
       <option value="hombre" th:selected="${producto.genero == 'hombre'}">Hombre</option>
     </select>
-  </label><br>
+  </label>
   <label>Sección:
     <select id="seccion" th:field="*{seccion}" required>
       <option value="">Selecciona una sección</option>
     </select>
-  </label><br>
+  </label>
   <label>Impermeable:
     <select th:field="*{impermeable}" required>
       <option value="">¿Es impermeable?</option>
       <option value="true">Sí</option>
       <option value="false">No</option>
     </select>
-  </label><br>
-  <label>Imagen actual:
+  </label>
+  <div class="img-actual">
+    <span>Imagen actual:</span>
     <span th:if="${producto.imagen != null}">
-      <img th:src="@{'/img/' + ${producto.imagen}}" alt="Imagen" style="max-width:250px; max-height:250px;" />
+      <img th:src="@{'/img/' + ${producto.imagen}}" alt="Imagen" />
     </span>
     <span th:if="${producto.imagen == null}">Sin imagen</span>
-  </label><br>
-  <label>Actualizar imagen: <input type="file" name="imagenFile" accept="image/*"/></label><br>
+  </div>
+  <label>Actualizar imagen: <input type="file" name="imagenFile" accept="image/*"/></label>
   <button type="submit">Actualizar</button>
 </form>
 <a th:href="@{/productos}">Volver a la lista</a>
@@ -55,22 +56,4 @@
     const seccion = document.getElementById('seccion');
     seccion.innerHTML = '<option value="">Selecciona una sección</option>';
     if (genero === 'mujer') {
-      seccion.innerHTML += '<option value="Woman">Woman</option>';
-      seccion.innerHTML += '<option value="Basic">Basic</option>';
-      seccion.innerHTML += '<option value="TRF">TRF</option>';
-    } else if (genero === 'hombre') {
-      seccion.innerHTML += '<option value="Man">Man</option>';
-      seccion.innerHTML += '<option value="TRF">TRF</option>';
-      seccion.innerHTML += '<option value="Global">Global</option>';
-    }
-  }
-  window.onload = function() {
-    actualizarSecciones();
-    const seccionSel = "[[${producto.seccion}]]";
-    if (seccionSel) {
-      document.getElementById('seccion').value = seccionSel;
-    }
-  }
-</script>
-</body>
-</html>
+      seccion.innerHTML += '<option
