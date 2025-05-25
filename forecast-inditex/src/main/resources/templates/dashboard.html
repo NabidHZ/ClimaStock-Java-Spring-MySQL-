@@ -7,15 +7,22 @@
 </head>
 <body class="dashboard-bg">
 <fragment th:replace="fragments/header :: main-header('ClimaStock', 'dashboard')"/>
-<!-- El resto del contenido del dashboard debajo -->
-  <div class="logo-centro">
-    <img src="/img/Logo.png" alt="Logo ClimaStock"/>
+
+<div class="dashboard-flex dashboard-flex-row">
+  <div class="intro">
+    <h2>¿Qué es ClimaStock?</h2>
+    <ul>
+      <li>Gestiona tu catálogo de productos y tiendas físicas.</li>
+      <li>Consulta el clima en tiempo real para cada tienda.</li>
+      <li>Obtén recomendaciones automáticas de productos según la previsión meteorológica.</li>
+      <li>Optimiza la exposición de prendas y mejora la experiencia en tienda.</li>
+    </ul>
   </div>
-  <h1>ClimaStock</h1>
-  <ul class="menu-principal">
-    <li><a th:href="@{/productos}"        class="menu-opcion">Gestión de Productos</a></li>
-    <li><a th:href="@{/tiendas}"         class="menu-opcion">Gestión de Tiendas</a></li>
-    <li><a th:href="@{/recomendaciones}" class="menu-opcion">Recomendaciones</a></li>
-  </ul>
+  <div class="logo-centro">
+    <img src="/img/Logo.png" alt="Logo ClimaStock" />
+  </div>
+</div>
+
 </body>
 </html>
+

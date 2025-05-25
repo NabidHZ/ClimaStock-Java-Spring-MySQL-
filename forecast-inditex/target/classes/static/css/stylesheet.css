@@ -357,30 +357,102 @@ a[href*="/productos/nuevo"]:hover {
 .dashboard-bg {
     position: relative;
     min-height: 100vh;
-    background: #f7f6f3; /* mismo color que el fondo del logo */
+    background: #f7f6f3;
 }
-
-.logo-centro {
-    position: fixed;
-    top: 58%; /* más abajo que el centro */
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 20;
+.dashboard-flex {
     display: flex;
-    justify-content: center;
     align-items: center;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    background: transparent;
+    justify-content: center;
+    gap: 3rem;
+    max-width: 1100px;
+    margin: 2rem auto 0 auto;
+    min-height: 60vh;
+    z-index: 1;
 }
-.logo-centro img {
-    width: 336px;
-    height: auto;
-    opacity: 0.98;
-    filter: drop-shadow(0 4px 24px rgba(0,0,0,0.10));
-    background: #f7f6f3; /* igual que el fondo */
-    border-radius: 1.5rem; /* opcional, si el logo lo permite */
+.dashboard-flex .logo-centro {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background: none;
+    position: static;
+    width: auto;
+    height: 100%;
+    min-height: 350px;
+    margin-right: 0;
+}
+.dashboard-flex .logo-centro img {
+    width: 360px; /* 15% más grande que 312px */
+    max-width: 100%;
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+    background: #f7f6f3;
+    transition: transform 0.3s;
+}
+.dashboard-flex .logo-centro img:hover {
+    transform: scale(1.04) rotate(-2deg);
+    box-shadow: 0 8px 32px rgba(191,167,122,0.18);
+}
+.dashboard-flex .intro {
+    flex: 1.2;
+    text-align: left;
+    background: rgba(255,255,255,0.97);
+    box-shadow: 0 4px 24px rgba(191,167,122,0.13);
+    border-radius: 1.2rem;
+    padding: 2.5rem 2.5rem 2rem 2.5rem;
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 320px;
+    animation: fadeInUp 0.8s;
+}
+.dashboard-flex .intro h2 {
+    text-align: left;
+    margin-bottom: 1.2rem;
+    color: #bfa77a;
+    font-size: 2rem;
+    letter-spacing: 1px;
+}
+.dashboard-flex .intro ul {
+    list-style: disc inside;
+    color: #444;
+    font-size: 1.13rem;
+    margin-left: 0.5rem;
+    padding-left: 0;
+}
+.dashboard-flex .intro li {
+    margin: 0.7rem 0;
+    line-height: 1.5;
+    padding-left: 0.2rem;
+}
+@media (max-width: 900px) {
+    .dashboard-flex {
+        flex-direction: column;
+        align-items: center !important;
+        gap: 1.5rem;
+        min-height: unset;
+    }
+    .dashboard-flex .logo-centro {
+        justify-content: center;
+        margin: 0 auto 1rem auto;
+        min-width: unset;
+    }
+    .dashboard-flex .intro {
+        margin-left: 0 !important;
+        max-width: 95vw;
+        text-align: center;
+        padding: 1.2rem;
+        align-items: center;
+    }
+    .dashboard-flex .intro h2 {
+        text-align: center;
+    }
+    .dashboard-flex .intro ul {
+        text-align: left;
+        margin: 0 auto;
+        padding-left: 1.2rem;
+    }
 }
 
 .page-header {
@@ -402,3 +474,90 @@ nav.main-nav {
     z-index: 99;
     padding-bottom: 0.5rem;
 }
+
+.intro {
+    max-width: 800px;
+    margin: 2rem auto;
+    background: rgba(255,255,255,0.9);
+    padding: 1.5rem 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 16px rgba(191,167,122,0.10);
+    animation: fadeInUp 0.8s;
+}
+.intro h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #222;
+}
+.intro ul {
+    list-style: disc;
+    padding-left: 1.2rem;
+    color: #444;
+}
+.intro ul ul {
+    list-style: circle;
+    margin-top: 0.5rem;
+}
+.intro li {
+    margin: 0.6rem 0;
+    line-height: 1.4;
+}
+.dashboard-flex {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 3rem;
+    max-width: 1100px;
+    margin: 2rem auto 0 auto;
+    min-height: 60vh;
+}
+.dashboard-flex .logo-centro {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    background: none;
+    position: static;
+    width: auto;
+    height: 100%;
+    min-height: 350px;
+}
+.dashboard-flex .logo-centro img {
+    width: 360px; /* 15% más grande que 312px */
+    max-width: 100%;
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+}
+.dashboard-flex .intro {
+    flex: 1.2;
+    text-align: left;
+    background: rgba(255,255,255,0.95);
+    box-shadow: 0 4px 16px rgba(191,167,122,0.10);
+    border-radius: 1rem;
+    padding: 2.5rem 2.5rem 2rem 2.5rem;
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 320px;
+}
+@media (max-width: 900px) {
+    .dashboard-flex {
+        flex-direction: column;
+        align-items: center !important;
+        gap: 1.5rem;
+        min-height: unset;
+    }
+    .dashboard-flex .logo-centro {
+        margin: 0 auto 1rem auto;
+        min-width: unset;
+    }
+    .dashboard-flex .intro {
+        margin-left: 0 !important;
+        max-width: 95vw;
+        text-align: center;
+        padding: 1.2rem;
+    }
+}
+}
+
