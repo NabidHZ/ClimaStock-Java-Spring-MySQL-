@@ -26,9 +26,15 @@ public class RecomendacionesWebController {
     }
 
     @GetMapping
-    public String mostrarRecomendaciones(@RequestParam(value = "tiendaId", required = false) Long tiendaId, Model model) {
+    public String mostrarRecomendaciones(
+            @RequestParam(value = "tiendaId", required = false) Long tiendaId,
+            @RequestParam(value = "genero", required = false) String genero,
+            @RequestParam(value = "seccion", required = false) String seccion,
+            Model model) {
         List<Tienda> tiendas = tiendaRepository.findAll();
         model.addAttribute("tiendas", tiendas);
+        model.addAttribute("generoSeleccionado", genero);
+        model.addAttribute("seccionSeleccionada", seccion);
 
         if (tiendaId != null) {
             Tienda tienda = tiendaRepository.findById(tiendaId).orElse(null);
@@ -38,9 +44,16 @@ public class RecomendacionesWebController {
                 double temperatura = weatherService.obtenerTemperaturaMaxima(
                         String.valueOf(tienda.getLatitud()), String.valueOf(tienda.getLongitud()));
                 List<Producto> productos = recomendacionService.recomendarProductos(tienda);
+                // Filtrado por género y sección igual que en lista-productos
+                if (genero != null && !genero.isEmpty()) {
+                    productos = productos.stream().filter(p -> genero.equals(p.getGenero())).collect(java.util.stream.Collectors.toList());
+                    if (seccion != null && !seccion.isEmpty()) {
+                        productos = productos.stream().filter(p -> seccion.equals(p.getSeccion())).collect(java.util.stream.Collectors.toList());
+                    }
+                }
                 List<Producto> impermeables = productos.stream()
                         .filter(p -> Boolean.TRUE.equals(p.getImpermeable()))
-                        .collect(Collectors.toList());
+                        .collect(java.util.stream.Collectors.toList());
                 model.addAttribute("productos", productos);
                 model.addAttribute("lluvia", lluvia);
                 model.addAttribute("temperatura", temperatura);
@@ -51,3 +64,4 @@ public class RecomendacionesWebController {
         return "recomendaciones";
     }
 }
+

@@ -10,7 +10,7 @@
 
 <!-- Formulario centrado y estilizado -->
 <div class="form-container">
-  <form th:action="@{/recomendaciones}" method="get" class="filter-form">
+  <form th:action="@{/recomendaciones}" method="get" class="filter-form" id="filtroRecomendaciones">
     <label for="tienda">Selecciona una tienda:</label>
     <select name="tiendaId" id="tienda" required>
       <option value="">-- Elige una tienda --</option>
@@ -19,6 +19,16 @@
               th:text="${tienda.nombre}"
               th:selected="${tienda.id} == ${selectedTiendaId}">
       </option>
+    </select>
+    <label for="genero">Género:</label>
+    <select name="genero" id="genero" onchange="actualizarSecciones(); document.getElementById('filtroRecomendaciones').submit();">
+      <option value="">Todos</option>
+      <option value="mujer" th:selected="${generoSeleccionado} == 'mujer'">Mujer</option>
+      <option value="hombre" th:selected="${generoSeleccionado} == 'hombre'">Hombre</option>
+    </select>
+    <label for="seccion">Sección:</label>
+    <select name="seccion" id="seccion" onchange="document.getElementById('filtroRecomendaciones').submit();">
+      <option value="">Todas</option>
     </select>
     <button type="submit">Ver recomendaciones</button>
   </form>
@@ -53,9 +63,13 @@
             <img th:if="${producto.imagen}" th:src="@{'/img/' + ${producto.imagen}}" alt="Imagen">
           </div>
           <div class="product-info">
-            <h3 th:text="${producto.nombre}"></h3>
-            <p><strong>Ref:</strong> <span th:text="${producto.id}"></span></p>
+            <h2 th:text="${producto.nombre}"></h2>
+            <p><strong>Referencia:</strong> <span th:text="${producto.id}"></span></p>
+            <p><strong>Categoría:</strong> <span th:text="${producto.categoria}"></span></p>
             <p><strong>Estación:</strong> <span th:text="${producto.estacion}"></span></p>
+            <p><strong>Género:</strong> <span th:text="${producto.genero}"></span></p>
+            <p><strong>Sección:</strong> <span th:text="${producto.seccion}"></span></p>
+            <p><strong>Impermeable:</strong> <span th:text="${producto.impermeable} ? 'Sí' : 'No'"></span></p>
           </div>
         </div>
       </div>
@@ -72,14 +86,23 @@
             <img th:if="${producto.imagen}" th:src="@{'/img/' + ${producto.imagen}}" alt="Imagen">
           </div>
           <div class="product-info">
-            <h3 th:text="${producto.nombre}"></h3>
-            <p><strong>Ref:</strong> <span th:text="${producto.id}"></span></p>
+            <h2 th:text="${producto.nombre}"></h2>
+            <p><strong>Referencia:</strong> <span th:text="${producto.id}"></span></p>
+            <p><strong>Categoría:</strong> <span th:text="${producto.categoria}"></span></p>
             <p><strong>Estación:</strong> <span th:text="${producto.estacion}"></span></p>
+            <p><strong>Género:</strong> <span th:text="${producto.genero}"></span></p>
+            <p><strong>Sección:</strong> <span th:text="${producto.seccion}"></span></p>
+            <p><strong>Impermeable:</strong> <span th:text="${producto.impermeable} ? 'Sí' : 'No'"></span></p>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-</body>
-</html>
+<script>
+    function actualizarSecciones() {
+        const genero = document.getElementById('genero').value;
+        const seccion = document.getElementById('seccion');
+        seccion.innerHTML = '<option value="">Todas</option>';
+        if (genero === 'mujer') {
+
