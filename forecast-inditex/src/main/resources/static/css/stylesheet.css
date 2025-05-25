@@ -384,8 +384,8 @@ a[href*="/productos/nuevo"]:hover {
 }
 
 .page-header {
-    position: sticky;
-    top: 0;
+    /* position: sticky; */
+    /* top: 0; */
     background: #f7f6f3;
     z-index: 100;
     padding-top: 0.3rem; /* antes 1rem, ahora más cerca del borde superior */
@@ -396,8 +396,8 @@ nav.main-nav {
     justify-content: center;
     gap: 2.3rem;
     margin: 1.3rem 0 1.5rem 0; /* antes 2.3rem, ahora 1.3rem para mantener la proporción */
-    position: sticky;
-    top: 4rem;
+    /* position: sticky; */
+    /* top: 4rem; */
     background: #f7f6f3;
     z-index: 99;
     padding-bottom: 0.5rem;
