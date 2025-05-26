@@ -30,7 +30,7 @@
       <option th:each="dia : ${#numbers.sequence(0,6)}"
               th:value="${#temporals.format(T(java.time.LocalDate).now().plusDays(dia), 'yyyy-MM-dd')}"
               th:text="${#temporals.format(T(java.time.LocalDate).now().plusDays(dia), 'dd/MM/yyyy')}"
-              th:selected="|${selectedFecha} == '${#temporals.format(T(java.time.LocalDate).now().plusDays(dia), 'yyyy-MM-dd')}'|">
+              th:selected="${selectedFecha} == ${#temporals.format(T(java.time.LocalDate).now().plusDays(dia), 'yyyy-MM-dd')}">
       </option>
     </select>
     <button type="submit">Ver recomendaciones</button>
