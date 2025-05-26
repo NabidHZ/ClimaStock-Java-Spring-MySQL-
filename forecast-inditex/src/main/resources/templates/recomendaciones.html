@@ -11,7 +11,7 @@
 <div class="form-container">
   <form th:action="@{/recomendaciones}" method="get" class="filter-form" id="filtroRecomendaciones">
     <label for="tienda">Selecciona una tienda:</label>
-    <select name="tiendaId" id="tienda" required>
+    <select name="tiendaId" id="tienda" required onchange="document.getElementById('filtroRecomendaciones').submit();">
       <option value="">-- Elige una tienda --</option>
       <option th:each="tienda : ${tiendas}"
               th:value="${tienda.id}"
@@ -57,26 +57,46 @@
 
     <div th:if="${recomendacionDia.impermeables != null and #lists.size(recomendacionDia.impermeables) > 0}">
       <h3>Productos impermeables recomendados:</h3>
-      <ul>
-        <li th:each="prod : ${recomendacionDia.impermeables}">
-          <span th:text="${prod.nombre}"></span>
-          <span th:if="${prod.imagen != null}">
-            <img th:src="@{'/img/' + ${prod.imagen}}" alt="Imagen" style="height:40px;vertical-align:middle;"/>
-          </span>
-        </li>
-      </ul>
+      <div class="card-background">
+        <div class="card-list">
+          <div class="product-card" th:each="prod : ${recomendacionDia.impermeables}">
+            <div class="product-image">
+              <img th:if="${prod.imagen}" th:src="@{'/img/' + ${prod.imagen}}" alt="Imagen">
+            </div>
+            <div class="product-info">
+              <h2 th:text="${prod.nombre}"></h2>
+              <p><strong>Referencia:</strong> <span th:text="${prod.id}"></span></p>
+              <p><strong>Categoría:</strong> <span th:text="${prod.categoria}"></span></p>
+              <p><strong>Estación:</strong> <span th:text="${prod.estacion}"></span></p>
+              <p><strong>Género:</strong> <span th:text="${prod.genero}"></span></p>
+              <p><strong>Sección:</strong> <span th:text="${prod.seccion}"></span></p>
+              <p><strong>Impermeable:</strong> <span th:text="${prod.impermeable} ? 'Sí' : 'No'"></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div th:if="${recomendacionDia.productos != null and #lists.size(recomendacionDia.productos) > 0}">
       <h3>Productos recomendados:</h3>
-      <ul>
-        <li th:each="prod : ${recomendacionDia.productos}">
-          <span th:text="${prod.nombre}"></span>
-          <span th:if="${prod.imagen != null}">
-            <img th:src="@{'/img/' + ${prod.imagen}}" alt="Imagen" style="height:40px;vertical-align:middle;"/>
-          </span>
-        </li>
-      </ul>
+      <div class="card-background">
+        <div class="card-list">
+          <div class="product-card" th:each="prod : ${recomendacionDia.productos}">
+            <div class="product-image">
+              <img th:if="${prod.imagen}" th:src="@{'/img/' + ${prod.imagen}}" alt="Imagen">
+            </div>
+            <div class="product-info">
+              <h2 th:text="${prod.nombre}"></h2>
+              <p><strong>Referencia:</strong> <span th:text="${prod.id}"></span></p>
+              <p><strong>Categoría:</strong> <span th:text="${prod.categoria}"></span></p>
+              <p><strong>Estación:</strong> <span th:text="${prod.estacion}"></span></p>
+              <p><strong>Género:</strong> <span th:text="${prod.genero}"></span></p>
+              <p><strong>Sección:</strong> <span th:text="${prod.seccion}"></span></p>
+              <p><strong>Impermeable:</strong> <span th:text="${prod.impermeable} ? 'Sí' : 'No'"></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div th:if="${recomendacionDia.productos == null or #lists.isEmpty(recomendacionDia.productos)}">
       <p>No hay productos recomendados para este día y filtros seleccionados.</p>
@@ -85,3 +105,4 @@
 </div>
 </body>
 </html>
+
