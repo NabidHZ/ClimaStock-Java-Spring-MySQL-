@@ -31,10 +31,35 @@ public class WeatherService {
     }
 
     // En WeatherService.java
-    public boolean hayPrevisionLluvia(String lat, String lon) {
+    // src/main/java/com/inditex/service/WeatherService.java
+    public boolean hayPrevisionLluvia(String lat, String lon, java.time.LocalDate fecha) {
         String rawJson = fetchRawForecast(lat, lon);
-        JSONObject json = new JSONObject(rawJson);
-        JSONArray rain = json.getJSONObject("daily").getJSONArray("precipitation_sum");
-        return rain.getDouble(0) > 0; // Si hay precipitación el primer día
+        org.json.JSONObject json = new org.json.JSONObject(rawJson);
+        org.json.JSONArray rain = json.getJSONObject("daily").getJSONArray("precipitation_sum");
+        org.json.JSONArray fechas = json.getJSONObject("daily").getJSONArray("time");
+        for (int i = 0; i < fechas.length(); i++) {
+            if (fecha.toString().equals(fechas.getString(i))) {
+                return rain.getDouble(i) > 0;
+            }
+        }
+        // Si no se encuentra la fecha, devuelve la del primer día
+        return rain.getDouble(0) > 0;
+    }
+
+    //Recomendaciones en 7 dias
+    public double obtenerTemperaturaMaxima(String lat, String lon, java.time.LocalDate fecha) {
+        String rawJson = fetchRawForecast(lat, lon);
+        org.json.JSONObject json = new org.json.JSONObject(rawJson);
+        org.json.JSONArray temps = json.getJSONObject("daily").getJSONArray("temperature_2m_max");
+        org.json.JSONArray fechas = json.getJSONObject("daily").getJSONArray("time");
+        for (int i = 0; i < fechas.length(); i++) {
+            if (fecha.toString().equals(fechas.getString(i))) {
+                return temps.getDouble(i);
+            }
+        }
+        // Si no se encuentra la fecha, devuelve la del primer día
+        return temps.getDouble(0);
+
+
     }
 }

@@ -29,11 +29,12 @@ public class TiendaController {
         Map<Long, Boolean> lluviaPorTienda = new HashMap<>();
         Map<Long, Double> temperaturaMaxPorTienda = new HashMap<>();
         for (Tienda tienda : tiendas) {
+            java.time.LocalDate hoy = java.time.LocalDate.now();
             boolean lluvia = weatherService.hayPrevisionLluvia(
-                    String.valueOf(tienda.getLatitud()), String.valueOf(tienda.getLongitud())
+                    String.valueOf(tienda.getLatitud()), String.valueOf(tienda.getLongitud()), hoy
             );
             double tempMax = weatherService.obtenerTemperaturaMaxima(
-                    String.valueOf(tienda.getLatitud()), String.valueOf(tienda.getLongitud())
+                    String.valueOf(tienda.getLatitud()), String.valueOf(tienda.getLongitud()), hoy
             );
             lluviaPorTienda.put(tienda.getId(), lluvia);
             temperaturaMaxPorTienda.put(tienda.getId(), tempMax);

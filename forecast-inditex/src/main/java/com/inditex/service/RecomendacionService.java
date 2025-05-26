@@ -5,6 +5,8 @@ import com.inditex.model.Producto;
 import com.inditex.model.Tienda;
 import com.inditex.repository.ProductoRepository;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,13 +20,27 @@ public class RecomendacionService {
         this.weatherService = weatherService;
     }
 
-    // src/main/java/com/inditex/service/RecomendacionService.java
+    // Método original (hoy)
     public List<Producto> recomendarProductos(Tienda tienda) {
         double temp = weatherService.obtenerTemperaturaMaxima(
                 String.valueOf(tienda.getLatitud()), String.valueOf(tienda.getLongitud())
         );
         List<Producto> productos = productoRepository.findAll();
-        List<Producto> recomendados = productos.stream()
+        return filtrarPorTemperatura(productos, temp);
+    }
+
+    // NUEVO: método para una fecha concreta
+    public List<Producto> recomendarProductos(Tienda tienda, LocalDate fecha) {
+        double temp = weatherService.obtenerTemperaturaMaxima(
+                String.valueOf(tienda.getLatitud()), String.valueOf(tienda.getLongitud()), fecha
+        );
+        List<Producto> productos = productoRepository.findAll();
+        return filtrarPorTemperatura(productos, temp);
+    }
+
+    // Lógica de filtrado por temperatura
+    private List<Producto> filtrarPorTemperatura(List<Producto> productos, double temp) {
+        return productos.stream()
                 .filter(p -> {
                     String estacion = p.getEstacion().toLowerCase();
                     if (estacion.equals("invierno") && temp < 10) return true;
@@ -34,6 +50,5 @@ public class RecomendacionService {
                     return false;
                 })
                 .collect(Collectors.toList());
-        return recomendados;
     }
 }

@@ -39,25 +39,33 @@ public class RecomendacionesWebController {
         if (tiendaId != null) {
             Tienda tienda = tiendaRepository.findById(tiendaId).orElse(null);
             if (tienda != null) {
-                boolean lluvia = weatherService.hayPrevisionLluvia(
-                        String.valueOf(tienda.getLatitud()), String.valueOf(tienda.getLongitud()));
-                double temperatura = weatherService.obtenerTemperaturaMaxima(
-                        String.valueOf(tienda.getLatitud()), String.valueOf(tienda.getLongitud()));
-                List<Producto> productos = recomendacionService.recomendarProductos(tienda);
-                // Filtrado por género y sección igual que en lista-productos
-                if (genero != null && !genero.isEmpty()) {
-                    productos = productos.stream().filter(p -> genero.equals(p.getGenero())).collect(java.util.stream.Collectors.toList());
-                    if (seccion != null && !seccion.isEmpty()) {
-                        productos = productos.stream().filter(p -> seccion.equals(p.getSeccion())).collect(java.util.stream.Collectors.toList());
+                java.time.LocalDate hoy = java.time.LocalDate.now();
+                java.util.List<java.util.Map<String, Object>> recomendacionesPorDia = new java.util.ArrayList<>();
+                for (int i = 0; i < 7; i++) {
+                    java.time.LocalDate fecha = hoy.plusDays(i);
+                    boolean lluvia = weatherService.hayPrevisionLluvia(
+                            String.valueOf(tienda.getLatitud()), String.valueOf(tienda.getLongitud()), fecha);
+                    double temperatura = weatherService.obtenerTemperaturaMaxima(
+                            String.valueOf(tienda.getLatitud()), String.valueOf(tienda.getLongitud()), fecha);
+                    List<Producto> productos = recomendacionService.recomendarProductos(tienda, fecha);
+                    if (genero != null && !genero.isEmpty()) {
+                        productos = productos.stream().filter(p -> genero.equals(p.getGenero())).collect(java.util.stream.Collectors.toList());
+                        if (seccion != null && !seccion.isEmpty()) {
+                            productos = productos.stream().filter(p -> seccion.equals(p.getSeccion())).collect(java.util.stream.Collectors.toList());
+                        }
                     }
+                    List<Producto> impermeables = productos.stream()
+                            .filter(p -> Boolean.TRUE.equals(p.getImpermeable()))
+                            .collect(java.util.stream.Collectors.toList());
+                    java.util.Map<String, Object> dia = new java.util.HashMap<>();
+                    dia.put("fecha", fecha);
+                    dia.put("lluvia", lluvia);
+                    dia.put("temperatura", temperatura);
+                    dia.put("productos", productos);
+                    dia.put("impermeables", impermeables);
+                    recomendacionesPorDia.add(dia);
                 }
-                List<Producto> impermeables = productos.stream()
-                        .filter(p -> Boolean.TRUE.equals(p.getImpermeable()))
-                        .collect(java.util.stream.Collectors.toList());
-                model.addAttribute("productos", productos);
-                model.addAttribute("lluvia", lluvia);
-                model.addAttribute("temperatura", temperatura);
-                model.addAttribute("impermeables", impermeables);
+                model.addAttribute("recomendacionesPorDia", recomendacionesPorDia);
                 model.addAttribute("selectedTiendaId", tiendaId);
             }
         }
