@@ -25,70 +25,61 @@
       <option value="mujer" th:selected="${generoSeleccionado} == 'mujer'">Mujer</option>
       <option value="hombre" th:selected="${generoSeleccionado} == 'hombre'">Hombre</option>
     </select>
+    <label for="fecha">Día:</label>
+    <select name="fecha" id="fecha" onchange="document.getElementById('filtroRecomendaciones').submit();">
+      <option th:each="dia : ${#numbers.sequence(0,6)}"
+              th:value="${#temporals.format(T(java.time.LocalDate).now().plusDays(dia), 'yyyy-MM-dd')}"
+              th:text="${#temporals.format(T(java.time.LocalDate).now().plusDays(dia), 'dd/MM/yyyy')}"
+              th:selected="|${selectedFecha} == '${#temporals.format(T(java.time.LocalDate).now().plusDays(dia), 'yyyy-MM-dd')}'|">
+      </option>
+    </select>
     <button type="submit">Ver recomendaciones</button>
   </form>
 </div>
 
 <div th:if="${selectedTiendaId != null}">
-  <div th:if="${recomendacionesPorDia}">
-    <div th:each="dia : ${recomendacionesPorDia}">
-      <h2 th:text="'Recomendaciones para ' + ${#temporals.format(dia.fecha, 'dd/MM/yyyy')}"></h2>
-      <section class="weather-info">
-        <p><strong>Temp. máx prevista:</strong>
-          <span th:text="${dia.temperatura} + ' °C'"></span>
-        </p>
-        <p><strong>¿Previsión de lluvia?:</strong>
-          <span th:text="${dia.lluvia} ? 'Sí' : 'No'"></span>
-        </p>
-      </section>
+  <div th:if="${recomendacionDia != null}">
+    <h2 th:text="'Recomendaciones para ' + ${#temporals.format(recomendacionDia.fecha, 'dd/MM/yyyy')}"></h2>
+    <section class="weather-info">
+      <p>
+        <strong>Temperatura máxima:</strong>
+        <span th:text="${recomendacionDia.temperatura} + ' °C'"></span>
+      </p>
+      <p>
+        <strong>¿Lluvia?:</strong>
+        <span th:text="${recomendacionDia.lluvia} ? 'Sí' : 'No'"></span>
+      </p>
+    </section>
 
-      <div th:if="${dia.lluvia}" class="alert-message">
-        <strong>¡Atención!</strong> Hay previsión de lluvia. Destaca prendas impermeables.
-      </div>
+    <div th:if="${recomendacionDia.lluvia}" class="alert-message">
+      ¡Atención! Se prevé lluvia. Considera exponer productos impermeables.
+    </div>
 
-      <div th:if="${dia.impermeables != null and #lists.size(dia.impermeables) > 0}">
-        <h3>Prendas Impermeables</h3>
-        <div class="card-background">
-          <div class="card-list">
-            <div class="product-card" th:each="producto : ${dia.impermeables}">
-              <div class="product-image">
-                <img th:if="${producto.imagen}" th:src="@{'/img/' + ${producto.imagen}}" alt="Imagen">
-              </div>
-              <div class="product-info">
-                <h2 th:text="${producto.nombre}"></h2>
-                <p><strong>Referencia:</strong> <span th:text="${producto.id}"></span></p>
-                <p><strong>Categoría:</strong> <span th:text="${producto.categoria}"></span></p>
-                <p><strong>Estación:</strong> <span th:text="${producto.estacion}"></span></p>
-                <p><strong>Género:</strong> <span th:text="${producto.genero}"></span></p>
-                <p><strong>Sección:</strong> <span th:text="${producto.seccion}"></span></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div th:if="${recomendacionDia.impermeables != null and #lists.size(recomendacionDia.impermeables) > 0}">
+      <h3>Productos impermeables recomendados:</h3>
+      <ul>
+        <li th:each="prod : ${recomendacionDia.impermeables}">
+          <span th:text="${prod.nombre}"></span>
+          <span th:if="${prod.imagen != null}">
+            <img th:src="@{'/img/' + ${prod.imagen}}" alt="Imagen" style="height:40px;vertical-align:middle;"/>
+          </span>
+        </li>
+      </ul>
+    </div>
 
-      <div th:if="${dia.productos != null and #lists.size(dia.productos) > 0}">
-        <h3>Productos Recomendados</h3>
-        <div class="card-background">
-          <div class="card-list">
-            <div class="product-card" th:each="producto : ${dia.productos}">
-              <div class="product-image">
-                <img th:if="${producto.imagen}" th:src="@{'/img/' + ${producto.imagen}}" alt="Imagen">
-              </div>
-              <div class="product-info">
-                <h2 th:text="${producto.nombre}"></h2>
-                <p><strong>Referencia:</strong> <span th:text="${producto.id}"></span></p>
-                <p><strong>Categoría:</strong> <span th:text="${producto.categoria}"></span></p>
-                <p><strong>Estación:</strong> <span th:text="${producto.estacion}"></span></p>
-                <p><strong>Género:</strong> <span th:text="${producto.genero}"></span></p>
-                <p><strong>Sección:</strong> <span th:text="${producto.seccion}"></span></p>
-                <p><strong>Impermeable:</strong> <span th:text="${producto.impermeable} ? 'Sí' : 'No'"></span></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <hr>
+    <div th:if="${recomendacionDia.productos != null and #lists.size(recomendacionDia.productos) > 0}">
+      <h3>Productos recomendados:</h3>
+      <ul>
+        <li th:each="prod : ${recomendacionDia.productos}">
+          <span th:text="${prod.nombre}"></span>
+          <span th:if="${prod.imagen != null}">
+            <img th:src="@{'/img/' + ${prod.imagen}}" alt="Imagen" style="height:40px;vertical-align:middle;"/>
+          </span>
+        </li>
+      </ul>
+    </div>
+    <div th:if="${recomendacionDia.productos == null or #lists.isEmpty(recomendacionDia.productos)}">
+      <p>No hay productos recomendados para este día y filtros seleccionados.</p>
     </div>
   </div>
 </div>
