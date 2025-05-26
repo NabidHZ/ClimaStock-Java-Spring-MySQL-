@@ -6,17 +6,19 @@
     <link rel="stylesheet" href="/css/stylesheet.css">
 </head>
 <body>
-<h1>Agregar nueva tienda</h1>
-<form th:action="@{/tiendas/guardar}" th:object="${tienda}" method="post">
-    <label>Nombre: <input type="text" th:field="*{nombre}" required/></label><br>
-    <label>Ciudad: <input type="text" th:field="*{ciudad}" required/></label><br>
-    <label>Latitud: <input type="number" step="any" th:field="*{latitud}" required/></label><br>
-    <label>Longitud: <input type="number" step="any" th:field="*{longitud}" required/></label><br>
+<fragment th:replace="fragments/header :: main-header('Nueva Tienda', 'tiendas')"/>
+<h1 style="text-align:center;">Agregar nueva tienda</h1>
+<form class="form-edit-producto" th:action="@{/tiendas/guardar}" th:object="${tienda}" method="post">
+    <label>Nombre: <input type="text" th:field="*{nombre}" required/></label>
+    <label>Ciudad: <input type="text" th:field="*{ciudad}" required/></label>
+    <label>Latitud: <input type="number" step="any" th:field="*{latitud}" required/></label>
+    <label>Longitud: <input type="number" step="any" th:field="*{longitud}" required/></label>
     <button type="submit">Guardar</button>
+    <a th:href="@{/tiendas}">Volver a la lista</a>
 </form>
-<a th:href="@{/tiendas}">Volver a la lista</a>
-<div th:if="${param.exito}">
-    <p>Tienda guardada correctamente.</p>
+<div th:if="${param.exito}" class="alert-message">
+    Tienda guardada correctamente.
 </div>
 </body>
 </html>
+

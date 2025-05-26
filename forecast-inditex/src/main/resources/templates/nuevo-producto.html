@@ -5,11 +5,11 @@
     <link rel="stylesheet" href="/css/stylesheet.css">
 </head>
 <body>
-<a th:href="@{/}">Volver al Dashboard</a>
-<h1>Agregar nuevo producto</h1>
-<form th:action="@{/productos/guardar}" th:object="${producto}" method="post" enctype="multipart/form-data">
-    <label>Nombre: <input type="text" th:field="*{nombre}" required/></label><br>
-    <label>Categoría: <input type="text" th:field="*{categoria}" required/></label><br>
+<fragment th:replace="fragments/header :: main-header('Nuevo Producto', 'productos')"/>
+<h1 style="text-align:center;">Agregar nuevo producto</h1>
+<form class="form-edit-producto" th:action="@{/productos/guardar}" th:object="${producto}" method="post" enctype="multipart/form-data">
+    <label>Nombre: <input type="text" th:field="*{nombre}" required/></label>
+    <label>Categoría: <input type="text" th:field="*{categoria}" required/></label>
     <label>Estación:
         <select th:field="*{estacion}" required>
             <option value="">Selecciona una estación</option>
@@ -18,30 +18,30 @@
             <option value="verano">Verano</option>
             <option value="otoño">Otoño</option>
         </select>
-    </label><br>
+    </label>
     <label>Género:
         <select id="genero" th:field="*{genero}" required onchange="actualizarSecciones()">
             <option value="">Selecciona un género</option>
             <option value="mujer">Mujer</option>
             <option value="hombre">Hombre</option>
         </select>
-    </label><br>
+    </label>
     <label>Sección:
-        <select id="seccion" th:field="*{seccion}" required>
+        <select id="seccion" th:field="*{seccion}" required th:attr="data-valor=*{seccion}">
             <option value="">Selecciona una sección</option>
         </select>
-    </label><br>
+    </label>
     <label>Impermeable:
         <select th:field="*{impermeable}" required>
             <option value="">¿Es impermeable?</option>
             <option value="true">Sí</option>
             <option value="false">No</option>
         </select>
-    </label><br>
-    <label>Imagen: <input type="file" name="imagenFile" accept="image/*"/></label><br>
+    </label>
+    <label>Imagen: <input type="file" name="imagenFile" accept="image/*"/></label>
     <button type="submit">Guardar</button>
+    <a th:href="@{/productos}">Volver a la lista</a>
 </form>
-<a th:href="@{/productos}">Volver a la lista</a>
 <script>
     function actualizarSecciones() {
         const genero = document.getElementById('genero').value;
@@ -53,10 +53,18 @@
             seccion.innerHTML += '<option value="TRF">TRF</option>';
         } else if (genero === 'hombre') {
             seccion.innerHTML += '<option value="Man">Man</option>';
-            seccion.innerHTML += '<option value="TRF">TRF</option>';
             seccion.innerHTML += '<option value="Global">Global</option>';
+            seccion.innerHTML += '<option value="TRF">TRF</option>';
         }
     }
+    window.onload = function() {
+        actualizarSecciones();
+        const seccion = document.getElementById('seccion');
+        const valorGuardado = seccion.getAttribute('data-valor');
+        if (valorGuardado) {
+            seccion.value = valorGuardado;
+        }
+    };
 </script>
 </body>
 </html>

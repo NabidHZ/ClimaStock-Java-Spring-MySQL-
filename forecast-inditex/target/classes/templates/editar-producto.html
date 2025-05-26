@@ -5,10 +5,9 @@
   <link rel="stylesheet" href="/css/stylesheet.css">
 </head>
 <body>
-<a th:href="@{/}">Volver al Dashboard</a>
-<h1>Editar producto</h1>
+<fragment th:replace="fragments/header :: main-header('Editar Producto', 'productos')"/>
+<h1 style="text-align:center;">Editar producto</h1>
 <form class="form-edit-producto" th:action="@{'/productos/actualizar/' + ${producto.id}}" th:object="${producto}" method="post" enctype="multipart/form-data">
-  <label>Referencia: <input type="number" th:field="*{id}" required readonly/></label>
   <label>Nombre: <input type="text" th:field="*{nombre}" required/></label>
   <label>Categoría: <input type="text" th:field="*{categoria}" required/></label>
   <label>Estación:
@@ -23,12 +22,12 @@
   <label>Género:
     <select id="genero" th:field="*{genero}" required onchange="actualizarSecciones()">
       <option value="">Selecciona un género</option>
-      <option value="mujer" th:selected="${producto.genero == 'mujer'}">Mujer</option>
-      <option value="hombre" th:selected="${producto.genero == 'hombre'}">Hombre</option>
+      <option value="mujer">Mujer</option>
+      <option value="hombre">Hombre</option>
     </select>
   </label>
   <label>Sección:
-    <select id="seccion" th:field="*{seccion}" required>
+    <select id="seccion" th:field="*{seccion}" required th:attr="data-valor=*{seccion}">
       <option value="">Selecciona una sección</option>
     </select>
   </label>
@@ -39,21 +38,36 @@
       <option value="false">No</option>
     </select>
   </label>
-  <div class="img-actual">
-    <span>Imagen actual:</span>
-    <span th:if="${producto.imagen != null}">
-      <img th:src="@{'/img/' + ${producto.imagen}}" alt="Imagen" />
-    </span>
-    <span th:if="${producto.imagen == null}">Sin imagen</span>
+  <label>Imagen: <input type="file" name="imagenFile" accept="image/*"/></label>
+  <div th:if="${producto.imagen != null}">
+    <img th:src="@{'/img/' + ${producto.imagen}}" alt="Imagen actual" style="height:60px;vertical-align:middle;"/>
   </div>
-  <label>Actualizar imagen: <input type="file" name="imagenFile" accept="image/*"/></label>
   <button type="submit">Actualizar</button>
+  <a th:href="@{/productos}">Volver a la lista</a>
 </form>
-<a th:href="@{/productos}">Volver a la lista</a>
 <script>
   function actualizarSecciones() {
     const genero = document.getElementById('genero').value;
     const seccion = document.getElementById('seccion');
     seccion.innerHTML = '<option value="">Selecciona una sección</option>';
     if (genero === 'mujer') {
-      seccion.innerHTML += '<option
+      seccion.innerHTML += '<option value="Woman">Woman</option>';
+      seccion.innerHTML += '<option value="Basic">Basic</option>';
+      seccion.innerHTML += '<option value="TRF">TRF</option>';
+    } else if (genero === 'hombre') {
+      seccion.innerHTML += '<option value="Man">Man</option>';
+      seccion.innerHTML += '<option value="Global">Global</option>';
+      seccion.innerHTML += '<option value="TRF">TRF</option>';
+    }
+  }
+  window.onload = function() {
+    actualizarSecciones();
+    const seccion = document.getElementById('seccion');
+    const valorGuardado = seccion.getAttribute('data-valor');
+    if (valorGuardado) {
+      seccion.value = valorGuardado;
+    }
+  };
+</script>
+</body>
+</html>
