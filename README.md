@@ -2,7 +2,7 @@
 
 Este proyecto es una aplicación web que recomienda a las tiendas físicas de Inditex qué productos destacar según el clima local de su ciudad. El objetivo es optimizar la rotación de stock adaptando la oferta en tienda a las condiciones meteorológicas previstas.
 
-![image](https://github.com/user-attachments/assets/cb6dc5e7-1242-47c7-8e23-e11b8dae02e2)
+![image](https://github.com/user-attachments/assets/c3855ec2-1077-48a9-8f2f-9c544245b4d9)
 
 ## ¿Qué ofrece ClimaStock?
 
@@ -19,25 +19,36 @@ Este proyecto es una aplicación web que recomienda a las tiendas físicas de In
 
 1. **Carga de Catálogo**  
    El usuario puede añadir y editar productos, cada uno con categoría, estación recomendada, género, sección, si es impermeable y una imagen asociada.
-   ![image](https://github.com/user-attachments/assets/c1e1821c-9dd9-4077-a998-ba0d12574320)
+   ![image](https://github.com/user-attachments/assets/0ebaa23e-3ffb-42be-a811-4466111009c5)
+
 
 2. **Gestión de Tiendas**  
    Se pueden crear, editar y eliminar tiendas físicas, cada una con su localización (latitud y longitud).
+   ![image](https://github.com/user-attachments/assets/e1ed4aa8-8dab-4538-a1a1-850e0f2069fb)
 
-3. **Obtención de Datos Meteorológicos**  
-   El sistema consulta Open-Meteo para obtener la previsión del clima (temperatura máxima y lluvia) en cada ciudad donde hay una tienda.
-   ![image](https://github.com/user-attachments/assets/e196d0a7-27e8-499f-aa38-daff9564d097)
 
-4. **Lógica de Recomendación**  
+4. **Obtención de Datos Meteorológicos**  
+   El sistema consulta la API de Open-Meteo para obtener la previsión del clima (temperatura máxima y lluvia) en cada ciudad donde hay una tienda.
+   
+
+5. **Lógica de Recomendación**  
    Se aplican reglas automáticas:
     - Si la temperatura prevista es mayor a 25°C, se recomiendan productos de verano.
     - Si se prevé lluvia, se priorizan prendas impermeables.
     - Las reglas pueden adaptarse según las necesidades del negocio.
+![image](https://github.com/user-attachments/assets/f5736d37-f812-4f0d-a82c-11154e8716f7)
 
-5. **Visualización de Recomendaciones**  
+![image](https://github.com/user-attachments/assets/757138d2-b4a7-4723-81ef-07d532ba939b)
+
+
+   
+6. **Visualización de Recomendaciones**  
    Para cada tienda y día, el sistema genera una lista de productos recomendados en función del clima local, con filtros por género y sección.
 
-6. **Exposición de Resultados**
+   ![image](https://github.com/user-attachments/assets/507f6325-a1bf-4648-b09a-9bd994eea7e8)
+
+
+8. **Exposición de Resultados**
     - **API REST**: Endpoint `/recomendaciones/{tiendaId}` que devuelve las recomendaciones en JSON para una tienda concreta.
     - **Interfaz Web**: Página `/recomendaciones` para seleccionar tienda, día y filtros, y ver los productos sugeridos de forma visual.
       ![image](https://github.com/user-attachments/assets/1b310103-075d-44ce-a353-ac5e8548e1d9)
