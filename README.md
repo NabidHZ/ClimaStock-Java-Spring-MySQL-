@@ -51,9 +51,7 @@ Este proyecto es una aplicación web que recomienda a las tiendas físicas de In
 8. **Exposición de Resultados**
     - **API REST**: Endpoint `/recomendaciones/{tiendaId}` que devuelve las recomendaciones en JSON para una tienda concreta.
     - **Interfaz Web**: Página `/recomendaciones` para seleccionar tienda, día y filtros, y ver los productos sugeridos de forma visual.
-      ![image](https://github.com/user-attachments/assets/1b310103-075d-44ce-a353-ac5e8548e1d9)
-      ![image](https://github.com/user-attachments/assets/0d6ee6d9-75fc-4bcd-b45b-272e260fdcc8)
-
+ 
 ## Arquitectura y Tecnologías
 
 - **Java 17+**
