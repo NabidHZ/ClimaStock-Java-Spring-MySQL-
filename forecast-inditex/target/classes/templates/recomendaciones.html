@@ -51,26 +51,24 @@
       </p>
     </section>
 
-    <div th:if="${recomendacionDia.lluvia}" class="alert-message">
-      ¡Atención! Se prevé lluvia. Considera exponer productos impermeables.
-    </div>
-
-    <div th:if="${recomendacionDia.impermeables != null and #lists.size(recomendacionDia.impermeables) > 0}">
-      <h3>Productos impermeables recomendados:</h3>
-      <div class="card-background">
-        <div class="card-list">
-          <div class="product-card" th:each="prod : ${recomendacionDia.impermeables}">
-            <div class="product-image">
-              <img th:if="${prod.imagen}" th:src="@{'/img/' + ${prod.imagen}}" alt="Imagen">
-            </div>
-            <div class="product-info">
-              <h2 th:text="${prod.nombre}"></h2>
-              <p><strong>Referencia:</strong> <span th:text="${prod.id}"></span></p>
-              <p><strong>Categoría:</strong> <span th:text="${prod.categoria}"></span></p>
-              <p><strong>Estación:</strong> <span th:text="${prod.estacion}"></span></p>
-              <p><strong>Género:</strong> <span th:text="${prod.genero}"></span></p>
-              <p><strong>Sección:</strong> <span th:text="${prod.seccion}"></span></p>
-              <p><strong>Impermeable:</strong> <span th:text="${prod.impermeable} ? 'Sí' : 'No'"></span></p>
+    <div th:if="${recomendacionDia.lluvia}">
+      <div th:if="${recomendacionDia.impermeables != null and #lists.size(recomendacionDia.impermeables) > 0}">
+        <h3>Productos impermeables recomendados:</h3>
+        <div class="card-background">
+          <div class="card-list">
+            <div class="product-card" th:each="prod : ${recomendacionDia.impermeables}">
+              <div class="product-image">
+                <img th:if="${prod.imagen}" th:src="@{'/img/' + ${prod.imagen}}" alt="Imagen">
+              </div>
+              <div class="product-info">
+                <h2 th:text="${prod.nombre}"></h2>
+                <p><strong>Referencia:</strong> <span th:text="${prod.id}"></span></p>
+                <p><strong>Categoría:</strong> <span th:text="${prod.categoria}"></span></p>
+                <p><strong>Estación:</strong> <span th:text="${prod.estacion}"></span></p>
+                <p><strong>Género:</strong> <span th:text="${prod.genero}"></span></p>
+                <p><strong>Sección:</strong> <span th:text="${prod.seccion}"></span></p>
+                <p><strong>Impermeable:</strong> <span th:text="${prod.impermeable} ? 'Sí' : 'No'"></span></p>
+              </div>
             </div>
           </div>
         </div>
@@ -105,4 +103,3 @@
 </div>
 </body>
 </html>
-
