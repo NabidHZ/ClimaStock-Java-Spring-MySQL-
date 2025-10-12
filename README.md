@@ -2,6 +2,9 @@
 
 Este proyecto es una aplicación web que recomienda a las tiendas físicas de Inditex qué productos destacar según el clima local de su ciudad. El objetivo es optimizar la rotación de stock adaptando la oferta en tienda a las condiciones meteorológicas previstas.
 
+nabidhassan34@gmail.com
+
+
 ![image](https://github.com/user-attachments/assets/c3855ec2-1077-48a9-8f2f-9c544245b4d9)
 
 ## ¿Qué ofrece ClimaStock?
